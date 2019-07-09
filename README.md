@@ -28,7 +28,7 @@ Vagrantfileを以下に書き換える
 Vagrant.configure("2") do |config|
   config.vm.box = "centos/7"
   config.vm.hostname = "test.local"
-  config.vm.network :private_network, ip: "192.168.56.50"
+  config.vm.network :private_network, ip: "192.168.56.60"
   config.vm.provider :virtualbox do |vb|
     vb.name = "test"
     vb.customize ["modifyvm", :id, "--memory", "768"]
@@ -45,7 +45,7 @@ $ cat Vagrantfile
 Vagrant.configure("2") do |config|
   config.vm.box = "centos/7"
   config.vm.hostname = "test.local"
-  config.vm.network :private_network, ip: "192.168.56.50"
+  config.vm.network :private_network, ip: "192.168.56.60"
   config.vm.provider :virtualbox do |vb|
     vb.name = "test"
     vb.customize ["modifyvm", :id, "--memory", "768"]
