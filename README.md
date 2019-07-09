@@ -3,7 +3,7 @@
 ## 概要
 ローカルPCにVirtualBox、Vagrantを用いてLinux開発環境を構築し、その環境にDockerコンテナを立ち上げてVirtualBox、Vagrant,Dockerの基本的な扱い方を学びます。
 
-## 前提
+## 前提環境
 VirtualBox、Vagrantがインストールされていること。DockerはVirtualBox、Vagrantで構築したLinux開発環境で利用するのでインストールは必須ではありません。
 
 [VirtualBox公式](https://www.virtualbox.org/)
@@ -11,6 +11,9 @@ VirtualBox、Vagrantがインストールされていること。DockerはVirtua
 [Vagrant公式](https://www.vagrantup.com/)
 
 ssh接続可能なターミナルが利用できること
+
+## 前提知識
+一般的なLinuxコマンド(ディレクトリ遷移、ファイル移動、ファイル編集)が扱えること。ハンズオン中ファイル編集はvimにて実演するため自身が扱うファイル編集方法に読み替えられること
 
 ## 事前確認
 任意のディレクトリで以下のコマンどを実行しエラーとならず`Vagrantfile`が作成されていること
