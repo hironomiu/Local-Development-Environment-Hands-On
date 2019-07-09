@@ -10,6 +10,8 @@ VirtualBox、Vagrantがインストールされていること。DockerはVirtua
 
 [Vagrant公式](https://www.vagrantup.com/)
 
+ssh接続可能なターミナルが利用できること
+
 ## 事前確認
 任意のディレクトリで以下のコマンどを実行しエラーとならず`Vagrantfile`が作成されていること
 
