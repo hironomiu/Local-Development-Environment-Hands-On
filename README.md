@@ -21,6 +21,7 @@ ssh接続可能なターミナルが利用できること
 ```
 $ vagrant init
 $ ls -la
+-rw-r--r--  1 xxxx  staff  3011  7  9 16:02 Vagrantfile
 ```
 
 Vagrantfileを以下に書き換える
@@ -60,7 +61,12 @@ end
 ```
 $ vagrant up
 
+==> default: Setting hostname...
+==> default: Configuring and enabling network interfaces...
+==> default: Rsyncing folder: /test/ => /vagrant
+
 $ vagrant ssh
+[vagrant@test ~]$
 ```
 
 ## 表記、用語について
