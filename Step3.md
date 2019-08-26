@@ -1,9 +1,8 @@
-# Step2
-## LAMP環境の構築
-Step1で構築した環境にapache、php、mysqlをインストールしLAMP環境を構築します
+# Step3
+## LAMP環境構築のスクリプト化
+Step2で構築したLAMP環境をスクリプト化します。apache、php、mysql
 
-
-# Step2
+# Step3
 ### Docker&Docker-compose
 MySQL、Re:dashをdockerで利用するため、dockerのインストール、起動を行いましょう
 ```
