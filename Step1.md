@@ -34,7 +34,7 @@ centos/7           (virtualbox, 1905.1)
 
 ### Vagrantfile編集
 カレントディレクトリで`Vagrantfile`を以下の内容で編集しましょう
-boxファイル`puppetlabs/centos-7.2-64-nocm`、IPアドレス `192.168.56.33`、VirtualBoxでのマシン名 `1day`、メモリ `768M`で設定
+boxファイル`puppetlabs/centos-7.2-64-nocm`、IPアドレス `192.168.56.50`、VirtualBoxでのマシン名 `1day`、メモリ `768M`で設定
 
 ```
 $ vi Vagrantfile
@@ -79,16 +79,18 @@ $ vagrant ssh-config
 Host default
   HostName 127.0.0.1
   User vagrant
-  Port 2200
+  Port 2222
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   PasswordAuthentication no
-  IdentityFile /Users/miurahironori/Vagrant/1/.vagrant/machines/default/virtualbox/private_key
+  IdentityFile /Users/miurahironori/Vagrant/1day/.vagrant/machines/default/virtualbox/private_key
   IdentitiesOnly yes
   LogLevel FATAL
 ```
 ### VirtualBoxでの確認
 VirtualBoxのGUIコンソールで`1day`と言う仮想サーバが存在し「実行中」となっていることを確認する
+
+![virtualbox-1](./images/step-1/virtualbox-1.png "virtualbox-1")
 
 ### 接続とrootユーザ遷移
 `vagrant ssh`にて仮想環境に`vagrant`ユーザでログインし`root`まで遷移できることを確認する
@@ -103,7 +105,7 @@ vagrant  pts/0        2017-09-14 01:41 (10.0.2.2)
 ```
 
 ## 設定内容の確認
-`enp0s8`に`Vagrantfile`で設定したIP`192.168.56.33`が設定されていること。デフォルトルータ`10.0.2.2`、DNSサーバ`10.0.2.3`についても確認する
+`enp0s8`に`Vagrantfile`で設定したIP`192.168.56.50`が設定されていること。デフォルトルータ`10.0.2.2`、DNSサーバ`10.0.2.3`についても確認する
 
 ```
 [root@1day ~]# ip a
@@ -121,7 +123,7 @@ vagrant  pts/0        2017-09-14 01:41 (10.0.2.2)
        valid_lft forever preferred_lft forever
 3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
     link/ether 08:00:27:27:cb:87 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.56.33/24 brd 192.168.56.255 scope global enp0s8
+    inet 192.168.56.50/24 brd 192.168.56.255 scope global enp0s8
        valid_lft forever preferred_lft forever
     inet6 fe80::a00:27ff:fe27:cb87/64 scope link
        valid_lft forever preferred_lft forever
