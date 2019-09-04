@@ -4,6 +4,25 @@
 ## LAMP環境の構築
 Step1で構築した環境にapache、php、mysqlをインストールしLAMP環境を構築します
 
+## PHP7、httpd
+```
+yum -y install epel-release
+yum -y update
+yum -y install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+yum -y update
+
+yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt
+
+php -v
+
+yum list installed | grep httpd
+
+systemctl start httpd.service
+systemctl enable httpd.service
+
+curl localhost
+```
+
 ## MySQL
 
 ```
