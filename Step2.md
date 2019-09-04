@@ -11,7 +11,7 @@ yum -y update
 yum -y install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 yum -y update
 
-yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt
+yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
 
 php -v
 
@@ -73,3 +73,19 @@ mysql> show databases;
 
 mysql>
 ```
+
+## サンプルアプリのデプロイ
+
+```
+cd /var/www/html
+yum -y install wget
+wget http://wordpress.org/latest.tar.gz
+tar -xzvf latest.tar.gz
+
+vi /etc/httpd/conf/httpd.conf
+DocumentRoot "/var/www/html/wordpress"
+<Directory "/var/www/html/wordpress">
+
+systemctl restart httpd.service
+```
+
