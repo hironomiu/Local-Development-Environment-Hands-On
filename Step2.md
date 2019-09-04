@@ -1,4 +1,6 @@
 # Step2
+このStepではStep1で作成した仮装環境をLAMP環境にカスタマイズしていきます。
+
 ## LAMP環境の構築
 Step1で構築した環境にapache、php、mysqlをインストールしLAMP環境を構築します
 

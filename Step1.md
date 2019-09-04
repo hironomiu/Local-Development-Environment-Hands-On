@@ -1,9 +1,8 @@
 # Step1
 このStepではVagrant、VirtualBoxを用いて仮装環境を構築します
 
-## Vagrant
 
-### ハンズオン用ディレクトリの作成
+## ハンズオン用ディレクトリの作成
 HOST OS上の任意のディレクトリで`1day`ディレクトリを作成し、遷移しましょう。以降`1day`ディレクトリをカレントディレクトリとします。
 
 ```
@@ -11,7 +10,7 @@ $ mkdir 1day
 $ cd 1day
 ```
 
-### Vagrant設定ファイル(Vagrantfile)の作成
+## Vagrant設定ファイル(Vagrantfile)の作成
 `Vagrantfile`が作成されること
 
 ```
@@ -20,7 +19,7 @@ $ ls -la
 -rw-r--r--   1 miurahironori  staff  3008  9  7 17:24 Vagrantfile
 ```
 
-### boxファイルの配布
+## boxファイルの配布
 インターネットからDLするとそれなりのサイズのため、ネットワーク環境に不安がある場合に限り、事前に渡したUSBの中にある　`centos/7`ディレクトリを指定したディレクトリにコピーしましょう
 
 `~/.vagrant.d/boxes` ボックスファイルが格納されるディレクトリ    
@@ -34,7 +33,7 @@ $ vagrant box list
 centos/7           (virtualbox, 1905.1)
 ```
 
-### Vagrantfile編集
+## Vagrantfile編集
 カレントディレクトリで`Vagrantfile`を以下の内容で編集しましょう
 boxファイル`puppetlabs/centos-7.2-64-nocm`、IPアドレス `192.168.56.50`、VirtualBoxでのマシン名 `1day`、メモリ `768M`で設定
 
@@ -56,7 +55,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-### Vagrantによる仮想環境の起動(初回の作成)
+## Vagrantによる仮想環境の起動(初回の作成)
 `not created (virtualbox)`から`running (virtualbox)`となること
 
 ```
@@ -73,7 +72,7 @@ Current machine states:
 default                   running (virtualbox)
 ```
 
-### ssh-configの確認
+## ssh-configの確認
 今回のVagrant環境に接続する際の設定を確認する
 
 ```
@@ -89,12 +88,12 @@ Host default
   IdentitiesOnly yes
   LogLevel FATAL
 ```
-### VirtualBoxでの確認
+## VirtualBoxでの確認
 VirtualBoxのGUIコンソールで`1day`と言う仮想サーバが存在し「実行中」となっていることを確認する
 
 ![virtualbox-1](./images/step-1/virtualbox-1.png "virtualbox-1")
 
-### 接続とrootユーザ遷移
+## 接続とrootユーザ遷移
 `vagrant ssh`にて仮想環境に`vagrant`ユーザでログインし`root`まで遷移できることを確認する
 
 ```
@@ -198,7 +197,7 @@ DirectMap2M:      735232 kB
 ```
 **Q.CPU数、Disk容量、設定したIPについて確認してみましょう。(5分)**
 
-#### 補足
+## sshでの接続
 `vagrant ssh`をsshコマンドで実行
 
 ```
@@ -211,7 +210,87 @@ logout
 Connection to 192.168.56.50 closed.
 ```
 
-#### エディタのインストール
+## ファイル共有
+デフォルトではHOST-GUEST間でファイルが共有できないため`vagrant-vbguest`の機能を使いHOST-GUEST間のファイル共有を実現しましょう
+
+HOST OSからHOMEディレクトリにてshare.txtを作成し、GUEST OSから参照できることを確認
+
+```
+$ pwd
+/xxxxxxx/1day
+$ vi share.txt
+$ cat share.txt
+share
+$ vagrant ssh
+$ cd /vagrant
+$ ll
+ファイルが存在しないことを確認
+```
+
+`vagrant-vbguest`のインストール
+
+```
+$ vagrant plugin list
+No plugins installed.
+
+$ vagrant plugin install vagrant-vbguest
+Installing the 'vagrant-vbguest' plugin. This can take a few minutes...
+Fetching: micromachine-3.0.0.gem (100%)
+Fetching: vagrant-vbguest-0.19.0.gem (100%)
+Installed the plugin 'vagrant-vbguest (0.19.0)'!
+
+$ vagrant plugin list
+vagrant-vbguest (0.19.0, global)
+```
+
+Vagrantfileに以下のように`config.vm.synced_folder ".", "/vagrant", type: "virtualbox"`を追記しましょう
+
+```
+$ vi Vagrantfile
+$ cat Vagrantfile
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+  config.vm.hostname = "1day.local"
+  config.vm.network :private_network, ip: "192.168.56.50"
+  config.vm.provider :virtualbox do |vb|
+    vb.name = "1day"
+    vb.customize ["modifyvm", :id, "--memory", "768"]
+  end
+end
+```
+
+vagrantの削除から起動(5分ほど掛かります)
+
+```
+$ vagrant destroy
+
+$ vagrant up
+```
+
+ファイル共有の確認
+
+```
+$ vi share.txt
+$ cat share.txt
+share
+
+$ vagrant ssh
+[vagrant]$ cd /vagrant
+[vagrant]$ ll
+total 8
+-rw-r--r--. 1 vagrant vagrant 388  9月  4 08:12 Vagrantfile
+-rw-r--r--. 1 vagrant vagrant   6  9月  4 08:16 share.txt
+[vagrant]$
+[vagrant]$
+[vagrant]$ cat share.txt
+share
+```
+
+## エディタのインストール
 今後作業する上で使い慣れたエディタが良い人は必須ではありませんがインストールを行いましょう
 
 - vim
