@@ -4,6 +4,69 @@
 ## LAMP環境の構築
 Step1で構築した環境にapache、php、mysqlをインストールしLAMP環境を構築します
 
+## yum repo
+これから各種ミドルウェア(apache、MySQL）やPHPをインストールする際に利用するリポジトリの設定を行う
+
+**`/etc/yum.repos.d/`ディレクトリと内容について簡単に確認**
+
+```
+# ll /etc/yum.repos.d/
+total 96
+-rw-r--r--. 1 root root 1664 Nov 23  2018 CentOS-Base.repo
+-rw-r--r--. 1 root root 1309 Nov 23  2018 CentOS-CR.repo
+-rw-r--r--. 1 root root  649 Nov 23  2018 CentOS-Debuginfo.repo
+-rw-r--r--. 1 root root  314 Nov 23  2018 CentOS-fasttrack.repo
+-rw-r--r--. 1 root root  630 Nov 23  2018 CentOS-Media.repo
+-rw-r--r--. 1 root root 1331 Nov 23  2018 CentOS-Sources.repo
+-rw-r--r--. 1 root root 5701 Nov 23  2018 CentOS-Vault.repo
+
+# cat /etc/yum.repos.d/CentOS-Base.repo
+
+# CentOS-Base.repo
+#
+# The mirror system uses the connecting IP address of the client and the
+# update status of each mirror to pick mirrors that are updated to and
+# geographically close to the client.  You should use this for CentOS updates
+# unless you are manually picking other mirrors.
+#
+# If the mirrorlist= does not work for you, as a fall back you can try the
+# remarked out baseurl= line instead.
+#
+#
+
+[base]
+name=CentOS-$releasever - Base
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os&infra=$infra
+#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+#released updates
+[updates]
+name=CentOS-$releasever - Updates
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates&infra=$infra
+#baseurl=http://mirror.centos.org/centos/$releasever/updates/$basearch/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras&infra=$infra
+#baseurl=http://mirror.centos.org/centos/$releasever/extras/$basearch/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-$releasever - Plus
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=centosplus&infra=$infra
+#baseurl=http://mirror.centos.org/centos/$releasever/centosplus/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+```
+
 ## PHP7、httpd
 ```
 yum -y install epel-release
