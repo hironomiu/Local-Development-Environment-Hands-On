@@ -107,23 +107,60 @@ total 96
 -rw-r--r--. 1 root root 1314 Mar  8 07:34 remi-php73.repo
 -rw-r--r--. 1 root root 2605 Mar  8 07:34 remi.repo
 -rw-r--r--. 1 root root  750 Mar  8 07:34 remi-safe.repo
+
+# yum repolist
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: ftp.yz.yamagata-u.ac.jp
+ * epel: ftp.yz.yamagata-u.ac.jp
+ * extras: ftp.yz.yamagata-u.ac.jp
+ * remi-safe: mirror.innosol.asia
+ * updates: ftp.yz.yamagata-u.ac.jp
+repo id                                         repo name                                                                status
+!base/7/x86_64                                  CentOS-7 - Base                                                          10,019
+!epel/x86_64                                    Extra Packages for Enterprise Linux 7 - x86_64                           13,378
+!extras/7/x86_64                                CentOS-7 - Extras                                                           435
+!mysql-connectors-community/x86_64              MySQL Connectors Community                                                  118
+!mysql-tools-community/x86_64                   MySQL Tools Community                                                        95
+!mysql80-community/x86_64                       MySQL 8.0 Community Server                                                  129
+!remi-safe                                      Safe Remi's RPM repository for Enterprise Linux 7 - x86_64                3,600
+!updates/7/x86_64                               CentOS-7 - Updates                                                        2,500
+repolist: 30,274
 ```
 
 ## PHP7、apache(httpd)
 PHP7、apache(httpd)のインストールを行う
 
 ```
-yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
-
-php -v
-
-yum list installed | grep httpd
-
-systemctl start httpd.service
-systemctl enable httpd.service
-
-curl localhost
+# yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
 ```
+
+PHPのバージョンを確認
+
+```
+# php -v
+```
+
+apache(httpd)がインストールされていることを確認
+
+```
+# yum list installed | grep httpd
+```
+
+apache(httpd)の起動、自動起動の設定を行う
+
+```
+# systemctl start httpd.service
+# systemctl enable httpd.service
+```
+
+localhostに対しhttpリクエストを投げWebサーバ(httpd)が動作していることを確認
+
+```
+# curl localhost
+```
+
+ブラウザでも同様に192.168.56.50で確認する
 
 ## MySQL
 
