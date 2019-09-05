@@ -279,6 +279,20 @@ mysql> show create database wordpress;
 mysql> exit
 ```
 
+アプリケーションユーザの作成
+
+```
+mysql> create user 'admin'@'localhost'identified by 'qk9Baa29+sL';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> grant all on *.* to 'admin'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> alter user 'admin'@'localhost' identified with mysql_native_password by 'qk9Baa29+sL';
+Query OK, 0 rows affected (0.01 sec)
+```
+
 ## サンプルアプリのデプロイ
 
 `wget`コマンドのインストール
@@ -291,6 +305,7 @@ mysql> exit
 # cd /var/www/html
 # wget http://wordpress.org/latest.tar.gz
 # tar -xzvf latest.tar.gz
+# chown apache:apache -R wordpress
 ```
 
 apache(httpd)の設定変更と再起動
