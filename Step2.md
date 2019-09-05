@@ -246,21 +246,62 @@ mysql> show databases;
 +--------------------+
 4 rows in set (0.00 sec)
 
+mysql>
+```
+
+DB`wordpress`の作成
+
+```
+mysql>
+mysql> create database wordpress;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| wordpress          |
++--------------------+
+5 rows in set (0.04 sec)
+
+mysql> show create database wordpress;
++-----------+-------------------------------------------------------------------------------------------------------------------------------------+
+| Database  | Create Database                                                                                                                     |
++-----------+-------------------------------------------------------------------------------------------------------------------------------------+
+| wordpress | CREATE DATABASE `wordpress` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */ |
++-----------+-------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
 mysql> exit
 ```
 
 ## サンプルアプリのデプロイ
 
+`wget`コマンドのインストール
+
 ```
-cd /var/www/html
-yum -y install wget
-wget http://wordpress.org/latest.tar.gz
-tar -xzvf latest.tar.gz
+# yum -y install wget
+```
 
-vi /etc/httpd/conf/httpd.conf
-DocumentRoot "/var/www/html/wordpress"
-<Directory "/var/www/html/wordpress">
+```
+# cd /var/www/html
+# wget http://wordpress.org/latest.tar.gz
+# tar -xzvf latest.tar.gz
+```
 
-systemctl restart httpd.service
+apache(httpd)の設定変更と再起動
+
+```
+# vi /etc/httpd/conf/httpd.conf
+- DocumentRoot "/var/www/html"
++ DocumentRoot "/var/www/html/wordpress"
+- <Directory "/var/www/html">
++<Directory "/var/www/html/wordpress">
+
+# systemctl restart httpd.service
 ```
 
