@@ -1,36 +1,50 @@
 # Step3
-## LAMP環境構築のスクリプト化
-Step2で構築したLAMP環境をスクリプト化します。apache、php、mysql
+Step2で構築したLAMP環境のMySQLをDockerで置き換えます
 
-# Step3
-### Docker&Docker-compose
-MySQL、Re:dashをdockerで利用するため、dockerのインストール、起動を行いましょう
+## Docker&Docker-compose
+MySQLをdockerで利用するため、dockerのインストール、起動を行いましょう
+
 ```
 # yum install -y docker
 # systemctl start docker
+```
+
+バージョンの確認
+
+```
 # docker version
 Client:
- Version:         1.12.6
- API version:     1.24
- Package version: docker-1.12.6-48.git0fdc778.el7.centos.x86_64
- Go version:      go1.8.3
- Git commit:      0fdc778/1.12.6
- Built:           Thu Sep  7 18:00:07 2017
+ Version:         1.13.1
+ API version:     1.26
+ Package version: docker-1.13.1-102.git7f2769b.el7.centos.x86_64
+ Go version:      go1.10.3
+ Git commit:      7f2769b/1.13.1
+ Built:           Mon Aug  5 15:09:42 2019
  OS/Arch:         linux/amd64
 
 Server:
- Version:         1.12.6
- API version:     1.24
- Package version: docker-1.12.6-48.git0fdc778.el7.centos.x86_64
- Go version:      go1.8.3
- Git commit:      0fdc778/1.12.6
- Built:           Thu Sep  7 18:00:07 2017
+ Version:         1.13.1
+ API version:     1.26 (minimum version 1.12)
+ Package version: docker-1.13.1-102.git7f2769b.el7.centos.x86_64
+ Go version:      go1.10.3
+ Git commit:      7f2769b/1.13.1
+ Built:           Mon Aug  5 15:09:42 2019
  OS/Arch:         linux/amd64
+ Experimental:    false
 ```
-docker-composeのインストール
+
+docker-composeのインストールとファイルの権限変更
+
+[docker compose公式](https://docs.docker.com/compose/install/)
+
 ```
 # curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 # chmod +x /usr/local/bin/docker-compose
+```
+
+バージョンの確認
+
+```
 # docker-compose -version
 docker-compose version 1.16.1, build 6d1ac21
 ```
