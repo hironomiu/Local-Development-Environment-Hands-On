@@ -91,7 +91,7 @@ Host default
 ## VirtualBoxでの確認
 VirtualBoxのGUIコンソールで`1day`と言う仮想サーバが存在し「実行中」となっていることを確認する
 
-![virtualbox-1](./images/step-1/virtualbox-1.png "virtualbox-1")
+![virtualbox-1](./images/step1/virtualbox-1.png "virtualbox-1")
 
 ## 接続とrootユーザ遷移
 `vagrant ssh`にて仮想環境に`vagrant`ユーザでログインし`root`まで遷移できることを確認する
@@ -300,7 +300,7 @@ LANG="ja_JP.utf8"
 SYSFONT="latarcyrheb-sun16"
 
 # cp /usr/share/zoneinfo/Japan /etc/localtime
-cp: overwrite ‘/etc/localtime’? y
+cp: overwrite ‘/etc/localtime’? yを入力
 
 # export | grep LANG
 declare -x LANG="ja_JP.utf8"

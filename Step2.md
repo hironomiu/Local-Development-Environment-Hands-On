@@ -11,7 +11,7 @@ Step1で構築した環境にapache、php、mysqlをインストールしLAMP環
 
 ```
 # ll /etc/yum.repos.d/
-total 96
+total 32
 -rw-r--r--. 1 root root 1664 Nov 23  2018 CentOS-Base.repo
 -rw-r--r--. 1 root root 1309 Nov 23  2018 CentOS-CR.repo
 -rw-r--r--. 1 root root  649 Nov 23  2018 CentOS-Debuginfo.repo
@@ -68,6 +68,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 ```
 
 **epel**
+epelのインストールを行う。`yum -y update`は数分ほど掛かるので注意
 
 ```
 # yum -y install epel-release
@@ -75,6 +76,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 ```
 
 **remi**
+remiのインストールを行う。
 
 ```
 # yum -y install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
@@ -107,7 +109,11 @@ total 96
 -rw-r--r--. 1 root root 1314 Mar  8 07:34 remi-php73.repo
 -rw-r--r--. 1 root root 2605 Mar  8 07:34 remi.repo
 -rw-r--r--. 1 root root  750 Mar  8 07:34 remi-safe.repo
+```
 
+yumコマンドでも確認
+
+```
 # yum repolist
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
@@ -161,6 +167,7 @@ localhostに対しhttpリクエストを投げWebサーバ(httpd)が動作して
 ```
 
 ブラウザでも同様に192.168.56.50で確認する
+![httpd-1](./images/step2/httpd-1.png "httpd-1")
 
 apache(httpd)がPORT80番をLISTENしているか確認するため`lsof`をインストールし確認
 
@@ -306,6 +313,8 @@ Query OK, 0 rows affected (0.01 sec)
 # wget http://wordpress.org/latest.tar.gz
 # tar -xzvf latest.tar.gz
 # chown apache:apache -R wordpress
+# chcon -R -t httpd_sys_content_t /var/www/html/wordpress
+# chcon -R -t httpd_sys_rw_content_t /var/www/html/wordpress
 ```
 
 apache(httpd)の設定変更と再起動
