@@ -166,10 +166,11 @@ localhostに対しhttpリクエストを投げWebサーバ(httpd)が動作して
 # curl localhost
 ```
 
-ブラウザでも同様に192.168.56.50で確認する
+**ブラウザでも同様に192.168.56.50で確認する**
+
 ![httpd-1](./images/step2/httpd-1.png "httpd-1")
 
-apache(httpd)がPORT80番をLISTENしているか確認するため`lsof`をインストールし確認
+**apache(httpd)がPORT80番をLISTENしているか確認するため`lsof`をインストールし確認**
 
 ```
 # yum -y install lsof
@@ -195,11 +196,31 @@ MySQLのインストールを行う
 # rm -rf /var/lib/mysql/
 ```
 
-yumrepoをインストール
+yumrepoをインストールし`enabled`を確認
 
 ```
 # rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
 # yum repolist all | grep mysql
+mysql-cluster-7.5-community/x86_64 MySQL Cluster 7.5 Community   disabled
+mysql-cluster-7.5-community-source MySQL Cluster 7.5 Community - disabled
+mysql-cluster-7.6-community/x86_64 MySQL Cluster 7.6 Community   disabled
+mysql-cluster-7.6-community-source MySQL Cluster 7.6 Community - disabled
+mysql-cluster-8.0-community/x86_64 MySQL Cluster 8.0 Community   disabled
+mysql-cluster-8.0-community-source MySQL Cluster 8.0 Community - disabled
+mysql-connectors-community/x86_64  MySQL Connectors Community    enabled:    118
+mysql-connectors-community-source  MySQL Connectors Community -  disabled
+mysql-tools-community/x86_64       MySQL Tools Community         enabled:     95
+mysql-tools-community-source       MySQL Tools Community - Sourc disabled
+mysql-tools-preview/x86_64         MySQL Tools Preview           disabled
+mysql-tools-preview-source         MySQL Tools Preview - Source  disabled
+mysql55-community/x86_64           MySQL 5.5 Community Server    disabled
+mysql55-community-source           MySQL 5.5 Community Server -  disabled
+mysql56-community/x86_64           MySQL 5.6 Community Server    disabled
+mysql56-community-source           MySQL 5.6 Community Server -  disabled
+mysql57-community/x86_64           MySQL 5.7 Community Server    disabled
+mysql57-community-source           MySQL 5.7 Community Server -  disabled
+mysql80-community/x86_64           MySQL 8.0 Community Server    enabled:    129
+mysql80-community-source           MySQL 8.0 Community Server -  disabled
 ```
 
 MySQL8.0をインストール
@@ -215,7 +236,14 @@ MySQLの起動、自動起動を設定
 # systemctl enable mysqld.service
 ```
 
-rootパスワードをログから確認
+MySQLがPORT3306番をLISTENしているか確認
+
+```
+# lsof -i:3306
+COMMAND   PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+mysqld  31699 mysql   30u  IPv6  65873      0t0  TCP *:mysql (LISTEN)
+```
+MySQLのrootパスワードをログから確認`A temporary password is generated for root@localhost:`の右を確認
 
 ```
 # cat /var/log/mysqld.log
@@ -236,7 +264,7 @@ Remove test database and access to it? (Press y|Y for Yes, any other key for No)
 Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Yを入力
 ```
 
-MySQLクライアントからログイン
+MySQLクライアントからログイン。パスワードは`mysql_secure_installation`で設定したものを入力
 
 ```
 # mysql -u root -p
@@ -259,10 +287,13 @@ mysql>
 DB`wordpress`の作成
 
 ```
-mysql>
 mysql> create database wordpress;
 Query OK, 1 row affected (0.07 sec)
+```
 
+作成したDBの確認
+
+```
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -282,8 +313,6 @@ mysql> show create database wordpress;
 | wordpress | CREATE DATABASE `wordpress` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */ |
 +-----------+-------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
-
-mysql> exit
 ```
 
 アプリケーションユーザの作成
@@ -298,6 +327,8 @@ Query OK, 0 rows affected (0.01 sec)
 
 mysql> alter user 'admin'@'localhost' identified with mysql_native_password by 'qk9Baa29+sL';
 Query OK, 0 rows affected (0.01 sec)
+
+mysql> exit
 ```
 
 ## サンプルアプリのデプロイ
@@ -308,10 +339,21 @@ Query OK, 0 rows affected (0.01 sec)
 # yum -y install wget
 ```
 
+今回アプリケーションをデプロイするディレクトリへ遷移
 ```
 # cd /var/www/html
+```
+
+Wordpressを取得し`tar`で展開
+
+```
 # wget http://wordpress.org/latest.tar.gz
 # tar -xzvf latest.tar.gz
+```
+
+ファイル所有者、SELinuxの設定
+
+```
 # chown apache:apache -R wordpress
 # chcon -R -t httpd_sys_content_t /var/www/html/wordpress
 # chcon -R -t httpd_sys_rw_content_t /var/www/html/wordpress
@@ -325,7 +367,15 @@ apache(httpd)の設定変更と再起動
 + DocumentRoot "/var/www/html/wordpress"
 - <Directory "/var/www/html">
 +<Directory "/var/www/html/wordpress">
+```
 
+apache(httpd)の再起動
+
+```
 # systemctl restart httpd.service
 ```
+
+**ブラウザで192.168.56.50を表示。Wordpressの設定画面が表示されれば成功**
+
+![wordpress-1](./images/step2/wordpress-1.png "wordpress-1")
 
