@@ -6,7 +6,8 @@ MySQLをdockerで利用するため、dockerのインストール、起動を行
 
 ```
 # yum install -y docker
-# systemctl start docker
+# systemctl start docker.service
+# systemctl enable docker.service
 ```
 
 バージョンの確認
@@ -38,7 +39,7 @@ docker-composeのインストールとファイルの権限変更
 [docker compose公式](https://docs.docker.com/compose/install/)
 
 ```
-# curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+# curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 # chmod +x /usr/local/bin/docker-compose
 ```
 
@@ -46,8 +47,32 @@ docker-composeのインストールとファイルの権限変更
 
 ```
 # docker-compose -version
-docker-compose version 1.16.1, build 6d1ac21
+docker-compose version 1.24.1, build 4667896b
 ```
+
+## Docker MySQL
+
+dockerイメージの確認
+
+```
+# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+```
+
+MySQLのdockerイメージをpullします
+
+```
+# docker pull mysql:latest
+```
+
+dockerイメージの確認
+
+```
+# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+docker.io/mysql     latest              62a9f311b99c        3 weeks ago         445 MB
+```
+
 
 ### PORTの設定
 今回のミドルウェアで外部からアクセスさせるPORTの80,3306,5000を解放しましょう
