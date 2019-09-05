@@ -4,8 +4,15 @@ Step2で構築したLAMP環境のMySQLをDockerで置き換えます
 ## Docker&Docker-compose
 MySQLをdockerで利用するため、dockerのインストール、起動を行いましょう
 
+インストール
+
 ```
 # yum install -y docker
+```
+
+起動と自動起動の設定
+
+```
 # systemctl start docker.service
 # systemctl enable docker.service
 ```
@@ -34,7 +41,7 @@ Server:
  Experimental:    false
 ```
 
-docker-composeのインストールとファイルの権限変更
+docker-composeのインストールとファイル権限変更
 
 [docker compose公式](https://docs.docker.com/compose/install/)
 
@@ -73,6 +80,66 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 docker.io/mysql     latest              62a9f311b99c        3 weeks ago         445 MB
 ```
 
+### コンテナの起動と確認
+MySQLイメージからMYSQL_ROOT_PASSWORD=mysqlにてパスワードを設定しコンテナを起動します。今回はポートフォワードを3307から3307で行います。docker run後docker psでコンテナが立ち上がってることを確認しましょう
+
+確認
+
+```
+# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS 
+```
+
+コンテナ起動
+
+```
+# docker run --name mysqld -e MYSQL_ROOT_PASSWORD=mysql -d -p 3307:3306 mysql
+```
+
+確認(CONTAINER IDを確認)
+
+```
+# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                         NAMES
+1c0bb6af2ee4        mysql               "docker-entrypoint..."   30 seconds ago      Up 29 seconds       3306/tcp, 33060/tcp, 0.0.0.0:3307->3306/tcp   mysqld
+```
+
+### bashモードで接続
+コンテナに直接接続します。docker psにて出力された**CONTAINER ID**を指定しましょう。
+
+```
+# docker exec -it 1c0bb6af2ee4 bash
+root@1c0bb6af2ee4:/# mysql -u root -p
+Enter password:
+
+mysql> exit
+Bye
+
+root@1c0bb6af2ee4:/# exit
+exit
+```
+
+### 仮想サーバからの接続
+仮想サーバのMySQL Clientから接続
+
+```
+# mysql -u root -p --port=3307 -h127.0.0.1
+Enter password:
+
+mysql>
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.10 sec)
+
+mysql> exit
+```
 
 ### PORTの設定
 今回のミドルウェアで外部からアクセスさせるPORTの80,3306,5000を解放しましょう
