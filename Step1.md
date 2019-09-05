@@ -290,6 +290,24 @@ total 8
 share
 ```
 
+## ロケールとタイムゾーンの設定
+boxで設定されたLANG en_US.UTF-8、タイムゾーンUTCをja_JP.utf8、JSTに変更する
+
+```
+# vi /etc/sysconfig/i18n
+# cat /etc/sysconfig/i18n
+LANG="ja_JP.utf8"
+SYSFONT="latarcyrheb-sun16"
+
+# cp /usr/share/zoneinfo/Japan /etc/localtime
+cp: overwrite ‘/etc/localtime’? y
+
+# export | grep LANG
+declare -x LANG="ja_JP.utf8"
+# date
+2019年  9月  5日 木曜日 19:59:09 JST
+```
+
 ## エディタのインストール
 今後作業する上で使い慣れたエディタが良い人は必須ではありませんがインストールを行いましょう
 
