@@ -399,3 +399,16 @@ apache(httpd)の再起動
 サイトのタイトル「1dayインターン」、ユーザ名：admin、パスワードはテキスト保存しましょう、メールアドレスは任意で設定、検索エンジンでの表示はチェックしWordPressをインストールを押下
 
 ![wordpress-6](./images/step2/wordpress-6.png "wordpress-6")
+
+ログインを押下
+
+![wordpress-7](./images/step2/wordpress-7.png "wordpress-7")
+
+ユーザ名：admin、パスワードはテキスト保存したパスワードを入力しログイン
+
+![wordpress-8](./images/step2/wordpress-8.png "wordpress-8")
+
+管理画面が表示されればStep2は完了です
+
+![wordpress-9](./images/step2/wordpress-9.png "wordpress-9")
+
