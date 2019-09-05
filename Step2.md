@@ -67,13 +67,22 @@ enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 ```
 
+**epel**
+
+```
+# yum -y install epel-release
+# yum -y update
+```
+
+**remi**
+
+```
+# yum -y install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+# yum -y update
+```
+
 ## PHP7、httpd
 ```
-yum -y install epel-release
-yum -y update
-yum -y install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-yum -y update
-
 yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
 
 php -v
