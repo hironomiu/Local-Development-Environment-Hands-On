@@ -379,3 +379,23 @@ apache(httpd)の再起動
 
 ![wordpress-1](./images/step2/wordpress-1.png "wordpress-1")
 
+## Wordpressの設定
+日本語を選択し続けるを押下
+
+![wordpress-2](./images/step2/wordpress-2.png "wordpress-2")
+
+さあ、始めましょうを押下
+
+![wordpress-3](./images/step2/wordpress-3.png "wordpress-3")
+
+ユーザ：admin、パスワード：qk9Baa29+sL
+
+![wordpress-4](./images/step2/wordpress-4.png "wordpress-4")
+
+インストール実行を押下
+
+![wordpress-5](./images/step2/wordpress-5.png "wordpress-5")
+
+サイトのタイトル「1dayインターン」、ユーザ名：admin、パスワードはテキスト保存しましょう、メールアドレスは任意で設定、検索エンジンでの表示はチェックしWordPressをインストールを押下
+
+![wordpress-6](./images/step2/wordpress-6.png "wordpress-6")
