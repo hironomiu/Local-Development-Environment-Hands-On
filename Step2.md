@@ -81,7 +81,37 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 # yum -y update
 ```
 
-## PHP7、httpd
+**`/etc/yum.repos.d/`ディレクトリと内容について簡単に確認**
+
+```
+# ll /etc/yum.repos.d/
+total 96
+-rw-r--r--. 1 root root 1664 Nov 23  2018 CentOS-Base.repo
+-rw-r--r--. 1 root root 1309 Nov 23  2018 CentOS-CR.repo
+-rw-r--r--. 1 root root  649 Nov 23  2018 CentOS-Debuginfo.repo
+-rw-r--r--. 1 root root  314 Nov 23  2018 CentOS-fasttrack.repo
+-rw-r--r--. 1 root root  630 Nov 23  2018 CentOS-Media.repo
+-rw-r--r--. 1 root root 1331 Nov 23  2018 CentOS-Sources.repo
+-rw-r--r--. 1 root root 5701 Nov 23  2018 CentOS-Vault.repo
+-rw-r--r--. 1 root root  951 Oct  2  2017 epel.repo
+-rw-r--r--. 1 root root 1050 Oct  2  2017 epel-testing.repo
+-rw-r--r--. 1 root root  446 Mar  8 07:34 remi-glpi91.repo
+-rw-r--r--. 1 root root  446 Mar  8 07:34 remi-glpi92.repo
+-rw-r--r--. 1 root root  446 Mar  8 07:34 remi-glpi93.repo
+-rw-r--r--. 1 root root  446 Mar  8 07:34 remi-glpi94.repo
+-rw-r--r--. 1 root root  855 Mar  8 07:34 remi-modular.repo
+-rw-r--r--. 1 root root  456 Mar  8 07:34 remi-php54.repo
+-rw-r--r--. 1 root root 1314 Mar  8 07:34 remi-php70.repo
+-rw-r--r--. 1 root root 1314 Mar  8 07:34 remi-php71.repo
+-rw-r--r--. 1 root root 1314 Mar  8 07:34 remi-php72.repo
+-rw-r--r--. 1 root root 1314 Mar  8 07:34 remi-php73.repo
+-rw-r--r--. 1 root root 2605 Mar  8 07:34 remi.repo
+-rw-r--r--. 1 root root  750 Mar  8 07:34 remi-safe.repo
+```
+
+## PHP7、apache(httpd)
+PHP7、apache(httpd)のインストールを行う
+
 ```
 yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
 
