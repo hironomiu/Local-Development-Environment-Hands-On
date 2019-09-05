@@ -162,31 +162,63 @@ localhostに対しhttpリクエストを投げWebサーバ(httpd)が動作して
 
 ブラウザでも同様に192.168.56.50で確認する
 
-## MySQL
+apache(httpd)がPORT80番をLISTENしているか確認するため`lsof`をインストールし確認
 
 ```
-rpm -qa | grep mariadb
+# yum -y install lsof
+# lsof -i:80
+COMMAND  PID   USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+httpd    734   root    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
+httpd    769 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
+httpd    770 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
+httpd    771 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
+httpd    772 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
+httpd    773 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
+httpd   3007 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
+```
 
-yum -y remove mariadb-libs
+## MySQL
+MySQLのインストールを行う
 
-rm -rf /var/lib/mysql/
+標準でインストールされているmariadbを削除する
 
-rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+```
+# rpm -qa | grep mariadb
+# yum -y remove mariadb-libs
+# rm -rf /var/lib/mysql/
+```
 
-yum repolist all | grep mysql
+yumrepoをインストール
 
-yum -y install mysql-community-server
+```
+# rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+# yum repolist all | grep mysql
+```
 
-systemctl start mysqld.service
+MySQL8.0をインストール
 
-systemctl enable mysqld.service
+```
+# yum -y install mysql-community-server
+```
 
-パスワードをログから確認
-cat /var/log/mysqld.log
-grep password /var/log/mysqld.log
+MySQLの起動、自動起動を設定
 
+```
+# systemctl start mysqld.service
+# systemctl enable mysqld.service
+```
 
-mysql_secure_installation
+rootパスワードをログから確認
+
+```
+# cat /var/log/mysqld.log
+# grep password /var/log/mysqld.log
+```
+
+`mysql_secure_installation`を実行
+
+```
+# mysql_secure_installation
 Enter password for user root: 確認したパスワードを入力
 New password: 新しいパスワードを入力(例 i1db+abd8kD )
 Re-enter new password: 新しいパスワードを入力(例 i1db+abd8kD )
@@ -195,7 +227,11 @@ Remove anonymous users? (Press y|Y for Yes, any other key for No) : Yを入力
 Disallow root login remotely? (Press y|Y for Yes, any other key for No) : Yを入力
 Remove test database and access to it? (Press y|Y for Yes, any other key for No) : Yを入力
 Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Yを入力
+```
 
+MySQLクライアントからログイン
+
+```
 # mysql -u root -p
 Enter password:
 
@@ -210,7 +246,7 @@ mysql> show databases;
 +--------------------+
 4 rows in set (0.00 sec)
 
-mysql>
+mysql> exit
 ```
 
 ## サンプルアプリのデプロイ
