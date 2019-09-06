@@ -179,11 +179,7 @@ ADD ./my.cnf /etc/mysql/conf.d/my.cnf
 
 # vi my.cnf
 [mysqld]
-character-set-server=utf8mb4
 innodb-buffer-pool-size=128M
-
-[client]
-default-character-set=utf8mb4
 
 # cd ..
 
@@ -192,8 +188,35 @@ default-character-set=utf8mb4
 # docker-compose up -d
 # docker ps
 # docker exec -it 84336a6fb964 bash
-root@84336a6fb964:/# 
+# mysql -u root -p -h127.0.0.1 --port=3307
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.17 MySQL Community Server - GPL
 
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| wordpress          |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> exit
+Bye
+#
 ```
 ### PORTの設定
 今回のミドルウェアで外部からアクセスさせるPORTの80,3306,5000を解放しましょう
