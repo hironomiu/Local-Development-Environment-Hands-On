@@ -141,6 +141,9 @@ mysql> show databases;
 mysql> exit
 ```
 
+### Qestion
+MySQLClientで接続する際に`mysql -u root -p --port=3307 -hlocalhost`で接続するために指定するオプションを調べましょう
+
 ### docker MySQLコンテナの停止と削除
 確認したCONTAINER IDからdocker MySQLコンテナの停止と削除
 
@@ -157,35 +160,73 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 ## docker-compose
 
+docker-compose用のディレクトリ作成と遷移
+
 ```
- cd /Vagrant
+# cd /Vagrant
 # mkdir docker_mysql
+# cd docker_mysql
+```
+
+docker-compose.ymlの作成(vi以下の内容をペースト)
+
+```
 # vi docker-compose.yml
-version: '3'
+version: '3.3'
 services:
-  mysql:
+  db:
     build: ./mysql/
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: mysql
     ports:
       - "3307:3306"
-    environment:
-      - MYSQL_DATABASE=wordpress
-      - MYSQL_ROOT_PASSWORD=mysql
+```
 
+docker MySQL用のディレクトリ作成
+
+```
 # mkdir mysql
 # cd mysql
+```
+
+Dockerfileの作成(vi以下をペースト)
+
+```
 # vi Dockerfile
 FROM mysql:latest
 ADD ./my.cnf /etc/mysql/conf.d/my.cnf
+```
 
+MySQL設定ファイルmy.cnfの作成(vi以下をペースト)
+
+```
 # vi my.cnf
 [mysqld]
 innodb-buffer-pool-size=128M
+```
 
+docker-composeでbuild
+
+```
 # cd ..
-
 # docker-compose build
+```
+
+docker imegeの確認
+
+```
 # docker images
+```
+
+dockerコンテナの起動
+
+```
 # docker-compose up -d
+```
+
+```
 # docker ps
 # docker exec -it 84336a6fb964 bash
 # mysql -u root -p -h127.0.0.1 --port=3307
@@ -218,6 +259,80 @@ mysql> exit
 Bye
 #
 ```
+## DBアプリケーションユーザの作成
+`/vagrant`直下で作成
+
+```
+# cd /vagrant
+# vi init.sql
+create user 'admin'@'%'identified by 'qk9Baa29+sL';
+grant all on *.* to 'admin'@'%';
+alter user 'admin'@'%' identified with mysql_native_password by 'qk9Baa29+sL';
+```
+
+ユーザ作成確認
+
+```
+# mysql -u root -p -h127.0.0.1 --port=3307 < init.sql
+
+mysql> use mysql
+mysql> select user,host from user;
+
+mysql> exit
+```
+
+DBアプリケーションユーザで接続確認
+
+```
+# mysql -u admin -p -hlocalhost --protocol=tcp --port=3307
+
+mysql> show databases;
+mysql> exit
+```
+
+## データ移行
+mysqldumpを使いlocalhostで動作しているMySQLのデータをdockerコンテナのMySQLへ移行する
+
+```
+# cd /vagrant
+# mysqldump -u root -p wordpress > export.sql
+```
+
+LocalhostのMySQLを自動起動抑止と停止
+
+```
+# systemctl disable mysql.service
+# systemctl stop mysqld.service
+```
+
+ブラウザでWordpressのサイトを確認しましょう
+
+![error-wordpress-1](./images/step3/error-wordpress-1.png "error-wordpress-1")
+
+データベースのリストア
+
+```
+# cd /vagrant
+# mysql -u root -p -h127.0.0.1 --port=3307 wordpress < export.sql
+Enter password:
+```
+
+### SELinuxの設定変更
+
+```
+# setsebool -P httpd_can_network_connect=1
+```
+
+### WordpressのDB接続変更
+
+```
+# vi /var/www/html/wordpress/wp-config.php
+
+- define('DB_HOST', 'localhost');
++ define('DB_HOST', '127.0.0.1:3307');
+```
+
+
 ### PORTの設定
 今回のミドルウェアで外部からアクセスさせるPORTの80,3306,5000を解放しましょう
 
