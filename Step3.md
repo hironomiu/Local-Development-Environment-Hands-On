@@ -141,6 +141,60 @@ mysql> show databases;
 mysql> exit
 ```
 
+### docker MySQLコンテナの停止と削除
+確認したCONTAINER IDからdocker MySQLコンテナの停止と削除
+
+```
+# # docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                               NAMES
+4fc496c089a1        mysql               "docker-entrypoint..."   About an hour ago   Up About an hour    33060/tcp, 0.0.0.0:3307->3306/tcp   mysqld
+
+# docker stop 4fc496c089a1
+# docker rm mysqld
+# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+```
+
+## docker-compose
+
+```
+ cd /Vagrant
+# mkdir docker_mysql
+# vi docker-compose.yml
+version: '3'
+services:
+  mysql:
+    build: ./mysql/
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_ROOT_PASSWORD=mysql
+
+# mkdir mysql
+# cd mysql
+# vi Dockerfile
+FROM mysql:latest
+ADD ./my.cnf /etc/mysql/conf.d/my.cnf
+
+# vi my.cnf
+[mysqld]
+character-set-server=utf8mb4
+innodb-buffer-pool-size=128M
+
+[client]
+default-character-set=utf8mb4
+
+# cd ..
+
+# docker-compose build
+# docker images
+# docker-compose up -d
+# docker ps
+# docker exec -it 84336a6fb964 bash
+root@84336a6fb964:/# 
+
+```
 ### PORTの設定
 今回のミドルウェアで外部からアクセスさせるPORTの80,3306,5000を解放しましょう
 
