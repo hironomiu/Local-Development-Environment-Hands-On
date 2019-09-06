@@ -81,7 +81,7 @@ docker.io/mysql     latest              62a9f311b99c        3 weeks ago         
 ```
 
 ### コンテナの起動と確認
-MySQLイメージからMYSQL_ROOT_PASSWORD=mysqlにてパスワードを設定しコンテナを起動します。今回はポートフォワードを3307から3307で行います。docker run後docker psでコンテナが立ち上がってることを確認しましょう
+MySQLイメージからMYSQL_ROOT_PASSWORD=mysqlにてパスワードを設定しコンテナを起動します。今回はポートフォワードを3307から3306で行います。docker run後docker psでコンテナが立ち上がってることを確認しましょう
 
 確認
 
