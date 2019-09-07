@@ -9,7 +9,8 @@
 [Step4](https://github.com/hironomiu/Local-Development-Environment-Hands-On/blob/master/Step4.md)  
 
 ## 前提環境
-VirtualBox、Vagrantがインストールされていること。DockerはVirtualBox、Vagrantで構築したLinux開発環境で利用するのでインストールは必須ではありません。
+
+VirtualBox、Vagrantがインストールされていること。
 
 [VirtualBox公式](https://www.virtualbox.org/)
 
@@ -17,7 +18,7 @@ VirtualBox、Vagrantがインストールされていること。DockerはVirtua
 
 SSHターミナルが利用できること
 
-**重要 上記環境を整え事前に[Step0](https://github.com/hironomiu/Local-Development-Environment-Hands-On/blob/master/Step0.md)を行うこと**
+**重要 上記環境を整え、事前に[Step0](https://github.com/hironomiu/Local-Development-Environment-Hands-On/blob/master/Step0.md)を終えること**
 
 ## 前提知識
 一般的なLinuxコマンド(ディレクトリ遷移、ファイル移動、ファイル編集)が扱えること。ハンズオン中ファイル編集はvimにて実演するため自身が扱うファイル編集方法に読み替えられること
