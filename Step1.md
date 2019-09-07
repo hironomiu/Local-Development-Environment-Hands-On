@@ -331,28 +331,48 @@ share
 ## ロケールとタイムゾーンの設定
 boxで設定されたLANG en_US.UTF-8、タイムゾーンUTCをja_JP.utf8、JSTに変更する
 
-vi以降の内容をペースト
+ロケールの指定
 
 ```
-# vi /etc/sysconfig/i18n
+# localectl
+   System Locale: LANG=ja_JP.utf8
+       VC Keymap: us
+      X11 Layout: n/a
+
+# localectl set-locale LANG=ja_JP.utf8
+
+# localectl
+   System Locale: LANG=ja_JP.utf8
+       VC Keymap: us
+      X11 Layout: n/a
+# vi /etc/locale.conf
 LANG="ja_JP.utf8"
-SYSFONT="latarcyrheb-sun16"
 ```
 
-JSTの指定
+タイムゾーンJSTの指定
 
 ```
-# cp /usr/share/zoneinfo/Japan /etc/localtime
-cp: overwrite ‘/etc/localtime’? yを入力
-```
+# timedatectl
+      Local time: Sat 2019-09-07 10:13:22 JST
+  Universal time: Sat 2019-09-07 01:13:22 UTC
+        RTC time: Sat 2019-09-07 01:13:21
+       Time zone: UTC (JST, +0900)
+     NTP enabled: yes
+NTP synchronized: yes
+ RTC in local TZ: no
+      DST active: n/a
 
-確認
+# timedatectl set-timezone Asia/Tokyo
 
-```
-# export | grep LANG
-declare -x LANG="ja_JP.utf8"
-# date
-2019年  9月  5日 木曜日 19:59:09 JST
+# timedatectl
+      Local time: Sat 2019-09-07 10:13:33 JST
+  Universal time: Sat 2019-09-07 01:13:33 UTC
+        RTC time: Sat 2019-09-07 01:13:32
+       Time zone: Asia/Tokyo (JST, +0900)
+     NTP enabled: yes
+NTP synchronized: yes
+ RTC in local TZ: no
+      DST active: n/a
 ```
 
 ## エディタのインストール
