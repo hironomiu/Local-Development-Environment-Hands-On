@@ -138,7 +138,7 @@ repolist: 30,274
 PHP7、apache(httpd)のインストールを行う
 
 ```
-# yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
+# yum -y install --enablerepo=remi,remi-php74 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
 ```
 
 PHPのバージョンを確認
@@ -302,6 +302,8 @@ Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Yを入
 ```
 
 MySQLクライアントからログイン。パスワードは`mysql_secure_installation`で設定したものを入力
+
+パスワード：i1db+abd8kD
 
 ```
 # mysql -u root -p
