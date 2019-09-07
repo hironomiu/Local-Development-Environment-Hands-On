@@ -160,6 +160,12 @@ apache(httpd)の起動、自動起動の設定を行う
 # systemctl enable httpd.service
 ```
 
+確認(runningであること)
+
+```
+# systemctl status httpd.service
+```
+
 localhostに対しhttpリクエストを投げWebサーバ(httpd)が動作していることを確認
 
 ```
@@ -259,6 +265,12 @@ MySQLの起動、自動起動を設定
 ```
 # systemctl start mysqld.service
 # systemctl enable mysqld.service
+```
+
+確認(runningであること)
+
+```
+# systemctl status mysqld.service
 ```
 
 MySQLがPORT3306番をLISTENしているか確認
@@ -376,10 +388,15 @@ Wordpressを取得し`tar`で展開
 # tar -xzvf latest.tar.gz
 ```
 
-ファイル所有者、SELinuxの設定
+ファイル所有者の変更
 
 ```
 # chown apache:apache -R wordpress
+```
+
+SELinuxの設定
+
+```
 # chcon -R -t httpd_sys_content_t /var/www/html/wordpress
 # chcon -R -t httpd_sys_rw_content_t /var/www/html/wordpress
 ```
@@ -433,7 +450,9 @@ apache(httpd)の再起動
 
 ![wordpress-8](./images/step2/wordpress-8.png "wordpress-8")
 
-管理画面が表示されればStep2は完了です
+管理画面が表示されること
 
 ![wordpress-9](./images/step2/wordpress-9.png "wordpress-9")
+
+これでStep2は完了です
 
