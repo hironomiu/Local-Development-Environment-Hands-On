@@ -284,23 +284,30 @@ dockerコンテナの起動
 # docker-compose up -d
 ```
 
+docker MySql コンテナの確認
+
 ```
 # docker ps
+```
+
+### bashモードで接続
+コンテナに直接接続します。docker psにて出力された**CONTAINER ID**を指定しましょう。
+
+```
 # docker exec -it 84336a6fb964 bash
+```
+
+### MySQL接続
+コンテナ内でMySQLに接続(パスワード：mysql)
+
+```
 # mysql -u root -p -h127.0.0.1 --port=3307
 Enter password:
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 11
-Server version: 8.0.17 MySQL Community Server - GPL
+```
 
-Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+存在するデータベースの確認
 
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
+```
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -317,6 +324,7 @@ mysql> exit
 Bye
 #
 ```
+
 ## DBアプリケーションユーザの作成
 `/vagrant`直下で作成
 
