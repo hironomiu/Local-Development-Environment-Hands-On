@@ -1,5 +1,5 @@
 # Step3
-Step2で構築したLAMP環境のMySQLをDockerで置き換えます
+Step2で構築したLAMP環境のMySQLをDockerコンテナに置き換えます
 
 ## Docker&Docker-compose
 MySQLをdockerで利用するため、dockerのインストール、起動を行いましょう
@@ -15,6 +15,12 @@ MySQLをdockerで利用するため、dockerのインストール、起動を行
 ```
 # systemctl start docker.service
 # systemctl enable docker.service
+```
+
+確認(runningであること)
+
+```
+# systemctl status  docker.service
 ```
 
 バージョンの確認
@@ -109,24 +115,51 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 ```
 # docker exec -it 1c0bb6af2ee4 bash
-root@1c0bb6af2ee4:/# mysql -u root -p
+```
+
+コンテナ内でMySQLに接続します(パスワード：mysql)
+
+```
+# mysql -u root -p
 Enter password:
+```
+
+存在するデータベースの確認
+
+```
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.10 sec)
 
 mysql> exit
 Bye
+```
 
-root@1c0bb6af2ee4:/# exit
+コンテナから抜けます
+
+```
+# exit
 exit
 ```
 
 ### 仮想サーバからの接続
-仮想サーバのMySQL Clientから接続
+仮想サーバのMySQL Clientから接続(パスワード：mysql)
 
 ```
 # mysql -u root -p --port=3307 -h127.0.0.1
 Enter password:
+```
 
-mysql>
+存在するデータベースの確認
+
+```
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -144,16 +177,36 @@ mysql> exit
 ### Qestion
 MySQLClientで接続する際に`mysql -u root -p --port=3307 -hlocalhost`で接続するために指定するオプションを調べましょう
 
-### docker MySQLコンテナの停止と削除
-確認したCONTAINER IDからdocker MySQLコンテナの停止と削除
+### dockerコンテナの起動停止と削除
+起動したdockerコンテナを使い起動停止と削除を行う
+
+CONTAINER IDを確認
 
 ```
-# # docker ps
+# docker ps -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                               NAMES
 4fc496c089a1        mysql               "docker-entrypoint..."   About an hour ago   Up About an hour    33060/tcp, 0.0.0.0:3307->3306/tcp   mysqld
+```
 
+停止
+```
 # docker stop 4fc496c089a1
+```
+
+起動
+```
+# docker start 4fc496c089a1
+```
+
+削除
+
+```
 # docker rm mysqld
+```
+
+確認
+
+```
 # docker ps -a
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
