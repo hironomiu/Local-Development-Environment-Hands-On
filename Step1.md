@@ -110,6 +110,7 @@ Last login: Wed Sep  4 07:39:34 2019 from 192.168.56.1
 
 $ who
 vagrant  pts/0        Sep  4 07:40 (10.0.2.2)
+```
 
 rootに遷移
 
