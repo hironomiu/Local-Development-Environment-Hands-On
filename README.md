@@ -17,66 +17,10 @@ VirtualBox、Vagrantがインストールされていること。DockerはVirtua
 
 SSHターミナルが利用できること
 
+上記環境を整え事前に[Step0](https://github.com/hironomiu/Local-Development-Environment-Hands-On/blob/master/Step1.md)を行うこと  
+
 ## 前提知識
 一般的なLinuxコマンド(ディレクトリ遷移、ファイル移動、ファイル編集)が扱えること。ハンズオン中ファイル編集はvimにて実演するため自身が扱うファイル編集方法に読み替えられること
-
-## 事前確認
-任意のディレクトリで以下のコマンどを実行しエラーとならず`Vagrantfile`が作成されていること
-
-```
-$ vagrant init
-$ ls -la
--rw-r--r--  1 xxxx  staff  3011  7  9 16:02 Vagrantfile
-```
-
-Vagrantfileを以下に書き換える
-```
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
-Vagrant.configure("2") do |config|
-  config.vm.box = "centos/7"
-  config.vm.hostname = "test.local"
-  config.vm.network :private_network, ip: "192.168.56.60"
-  config.vm.provider :virtualbox do |vb|
-    vb.name = "test"
-    vb.customize ["modifyvm", :id, "--memory", "768"]
-  end
-end
-```
-
-書き換えの確認
-```
-$ cat Vagrantfile
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
-Vagrant.configure("2") do |config|
-  config.vm.box = "centos/7"
-  config.vm.hostname = "test.local"
-  config.vm.network :private_network, ip: "192.168.56.60"
-  config.vm.provider :virtualbox do |vb|
-    vb.name = "test"
-    vb.customize ["modifyvm", :id, "--memory", "768"]
-  end
-end
-```
-
-実行しエラーとならずssh接続できること
-```
-$ vagrant up
-
-==> default: Setting hostname...
-==> default: Configuring and enabling network interfaces...
-==> default: Rsyncing folder: /test/ => /vagrant
-
-$ vagrant ssh
-[vagrant@test ~]$ exit
-
-$ vagrant destroy
-    default: Are you sure you want to destroy the 'default' VM? [y/N] y
-==> default: Destroying VM and associated drives...
-```
 
 ## 表記、用語について
 - GUEST(ゲスト) OSは仮想サーバと同じ意味です
