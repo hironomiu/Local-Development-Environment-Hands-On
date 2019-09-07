@@ -336,13 +336,32 @@ grant all on *.* to 'admin'@'%';
 alter user 'admin'@'%' identified with mysql_native_password by 'qk9Baa29+sL';
 ```
 
-ユーザ作成確認
+ユーザ作成(パスワード：mysql)
 
 ```
 # mysql -u root -p -h127.0.0.1 --port=3307 < init.sql
+Enter password:
+```
 
+作成したユーザの確認(パスワード：mysql)
+
+adminユーザが存在すること
+
+```
+# mysql -u root -p -h127.0.0.1 --port=3307
 mysql> use mysql
 mysql> select user,host from user;
++------------------+-----------+
+| user             | host      |
++------------------+-----------+
+| admin            | %         |
+| root             | %         |
+| mysql.infoschema | localhost |
+| mysql.session    | localhost |
+| mysql.sys        | localhost |
+| root             | localhost |
++------------------+-----------+
+6 rows in set (0.00 sec)
 
 mysql> exit
 ```
