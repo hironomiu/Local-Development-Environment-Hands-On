@@ -96,6 +96,8 @@ VirtualBoxのGUIコンソールで`1day`と言う仮想サーバが存在し「�
 ## 接続とrootユーザ遷移
 `vagrant ssh`にて仮想環境に`vagrant`ユーザでログインし`root`まで遷移できることを確認する
 
+**注 以降`#`でのコマンドは`root`で行う**
+
 ```
 $ vagrant ssh
 Last login: Wed Sep  4 07:39:34 2019 from 192.168.56.1
