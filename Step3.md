@@ -368,6 +368,8 @@ mysql> exit
 
 DBアプリケーションユーザで接続確認
 
+パスワード：qk9Baa29+sL
+
 ```
 # mysql -u admin -p -hlocalhost --protocol=tcp --port=3307
 
@@ -378,6 +380,8 @@ mysql> exit
 ## データ移行
 mysqldumpを使いlocalhostで動作しているMySQLのデータをdockerコンテナのMySQLへ移行する
 
+パスワード：i1db+abd8kD
+
 ```
 # cd /vagrant
 # mysqldump -u root -p wordpress > export.sql
@@ -386,8 +390,14 @@ mysqldumpを使いlocalhostで動作しているMySQLのデータをdockerコン
 LocalhostのMySQLを自動起動抑止と停止
 
 ```
-# systemctl disable mysql.service
+# systemctl disable mysqld.service
 # systemctl stop mysqld.service
+```
+
+確認(Active: inactive (dead)であること)
+
+```
+# systemctl status mysqld.service
 ```
 
 ブラウザでWordpressのサイトを確認しましょう
@@ -395,6 +405,8 @@ LocalhostのMySQLを自動起動抑止と停止
 ![error-wordpress-1](./images/step3/error-wordpress-1.png "error-wordpress-1")
 
 データベースのリストア
+
+パスワード：mysql
 
 ```
 # cd /vagrant
@@ -416,6 +428,15 @@ Enter password:
 - define('DB_HOST', 'localhost');
 + define('DB_HOST', '127.0.0.1:3307');
 ```
+
+ブラウザでエラーだった192.168.56.50をリロードし管理画面が表示されれば成功
+
+![error-wordpress-2](./images/step3/error-wordpress-2.png "error-wordpress-2")
+
+
+
+
+
 
 
 ### PORTの設定
