@@ -230,8 +230,8 @@ version: '3.3'
 services:
   db:
     container_name: mysql-db
-    build: ./mysql/
     image: mysql:latest
+    build: ./mysql
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_ROOT_PASSWORD: mysql
@@ -254,15 +254,31 @@ Dockerfileの作成(vi以下をペースト)
 ```
 # vi Dockerfile
 FROM mysql:latest
-ADD ./my.cnf /etc/mysql/conf.d/my.cnf
+ADD ./conf.d/my.cnf /etc/mysql/conf.d/my.cnf
+ADD ./initdb.d/init.sql /docker-entrypoint-initdb.d/init.sql
 ```
 
 MySQL設定ファイルmy.cnfの作成(vi以下をペースト)
 
 ```
+# mkdir conf.d
+# cd conf.d
+
 # vi my.cnf
 [mysqld]
 innodb-buffer-pool-size=128M
+```
+
+アプリケーションユーザ作成スクリプトの作成(vi以下をペースト)
+
+```
+# cd ..
+# mkdir initdb.d
+
+# vi init.sql
+create user 'admin'@'%'identified by 'qk9Baa29+sL';
+grant all on *.* to 'admin'@'%';
+alter user 'admin'@'%' identified with mysql_native_password by 'qk9Baa29+sL';
 ```
 
 docker-composeでbuild
@@ -305,7 +321,7 @@ docker MySql コンテナの確認
 Enter password:
 ```
 
-存在するデータベースの確認
+存在するデータベースの確認(wordpressが存在すること)
 
 ```
 mysql> show databases;
@@ -319,37 +335,13 @@ mysql> show databases;
 | wordpress          |
 +--------------------+
 5 rows in set (0.00 sec)
-
-mysql> exit
-Bye
-#
 ```
 
-## DBアプリケーションユーザの作成
-`/vagrant`直下で作成
+アプリケーションユーザの確認(admin % が存在すること)
 
 ```
-# cd /vagrant
-# vi init.sql
-create user 'admin'@'%'identified by 'qk9Baa29+sL';
-grant all on *.* to 'admin'@'%';
-alter user 'admin'@'%' identified with mysql_native_password by 'qk9Baa29+sL';
-```
-
-ユーザ作成(パスワード：mysql)
-
-```
-# mysql -u root -p -h127.0.0.1 --port=3307 < init.sql
-Enter password:
-```
-
-作成したユーザの確認(パスワード：mysql)
-
-adminユーザが存在すること
-
-```
-# mysql -u root -p -h127.0.0.1 --port=3307
 mysql> use mysql
+
 mysql> select user,host from user;
 +------------------+-----------+
 | user             | host      |
@@ -364,6 +356,8 @@ mysql> select user,host from user;
 6 rows in set (0.00 sec)
 
 mysql> exit
+Bye
+#
 ```
 
 DBアプリケーションユーザで接続確認
