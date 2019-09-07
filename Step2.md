@@ -67,16 +67,16 @@ enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 ```
 
-**epel**
-epelのインストールを行う。`yum -y update`は数分ほど掛かるので注意
+### epel
+epelのインストール(注 `yum -y update`は数分ほど掛かる)
 
 ```
 # yum -y install epel-release
 # yum -y update
 ```
 
-**remi**
-remiのインストールを行う。
+### remi
+remiのインストール
 
 ```
 # yum -y install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
@@ -170,10 +170,16 @@ localhostに対しhttpリクエストを投げWebサーバ(httpd)が動作して
 
 ![httpd-1](./images/step2/httpd-1.png "httpd-1")
 
-**apache(httpd)がPORT80番をLISTENしているか確認するため`lsof`をインストールし確認**
+### lsof
+apache(httpd)がPORT80番をLISTENしているか確認するため`lsof`をインストール
 
 ```
 # yum -y install lsof
+```
+
+確認
+
+```
 # lsof -i:80
 COMMAND  PID   USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
 httpd    734   root    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
@@ -188,18 +194,37 @@ httpd   3007 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
 ## MySQL
 MySQLのインストールを行う
 
+### mariadb削除
 標準でインストールされているmariadbを削除する
 
+確認
 ```
 # rpm -qa | grep mariadb
+mariadb-libs-5.5.60-1.el7_5.x86_64
+```
+
+存在する場合削除
+
+```
 # yum -y remove mariadb-libs
+```
+
+ディレクトリも削除
+
+```
 # rm -rf /var/lib/mysql/
 ```
 
+### MySQL yumrepo
 yumrepoをインストールし`enabled`を確認
 
 ```
 # rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+```
+
+確認
+
+```
 # yum repolist all | grep mysql
 mysql-cluster-7.5-community/x86_64 MySQL Cluster 7.5 Community   disabled
 mysql-cluster-7.5-community-source MySQL Cluster 7.5 Community - disabled

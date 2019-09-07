@@ -335,7 +335,7 @@ boxで設定されたLANG en_US.UTF-8、タイムゾーンUTCをja_JP.utf8、JST
 
 ```
 # localectl
-   System Locale: LANG=ja_JP.utf8
+   System Locale: LANG=en_US.UTF-8
        VC Keymap: us
       X11 Layout: n/a
 
