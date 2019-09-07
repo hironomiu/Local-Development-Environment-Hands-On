@@ -254,7 +254,7 @@ mysql80-community/x86_64           MySQL 8.0 Community Server    enabled:    129
 mysql80-community-source           MySQL 8.0 Community Server -  disabled
 ```
 
-MySQL8.0をインストール
+MySQL8.0をインストール(450M以上あるので注意)
 
 ```
 # yum -y install mysql-community-server
@@ -291,14 +291,72 @@ MySQLのrootパスワードをログから確認`A temporary password is generat
 
 ```
 # mysql_secure_installation
-Enter password for user root: 確認したパスワードを入力
-New password: 新しいパスワードを入力(例 i1db+abd8kD )
-Re-enter new password: 新しいパスワードを入力(例 i1db+abd8kD )
-Change the password for root ? ((Press y|Y for Yes, any other key for No) : Yを入力
-Remove anonymous users? (Press y|Y for Yes, any other key for No) : Yを入力
-Disallow root login remotely? (Press y|Y for Yes, any other key for No) : Yを入力
-Remove test database and access to it? (Press y|Y for Yes, any other key for No) : Yを入力
-Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Yを入力
+```
+
+確認したパスワードを入力
+
+```
+Enter password for user root: 
+```
+
+i1db+abd8kD
+
+```
+New password: 
+```
+
+i1db+abd8kD
+
+```
+Re-enter new password: 
+```
+
+y
+
+```
+Change the password for root ? ((Press y|Y for Yes, any other key for No) : 
+```
+
+i1db+abd8kD
+
+```
+New password:
+```
+
+i1db+abd8kD
+
+```
+Re-enter new password:
+```
+
+y
+
+```
+Do you wish to continue with the password provided?(Press y|Y for Yes, any other key for No) :
+```
+
+y
+
+```
+Remove anonymous users? (Press y|Y for Yes, any other key for No) :
+```
+
+y
+
+```
+Disallow root login remotely? (Press y|Y for Yes, any other key for No) : 
+```
+
+y
+
+```
+Remove test database and access to it? (Press y|Y for Yes, any other key for No) : 
+```
+
+y
+
+```
+Reload privilege tables now? (Press y|Y for Yes, any other key for No) : 
 ```
 
 MySQLクライアントからログイン。パスワードは`mysql_secure_installation`で設定したものを入力
