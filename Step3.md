@@ -1,7 +1,7 @@
 # Step3
 Step2で構築したLAMP環境のMySQLをDockerコンテナに置き換えます
 
-## Docker&Docker-compose
+## Docker
 MySQLをdockerで利用するため、dockerのインストール、起動を行いましょう
 
 インストール
@@ -45,22 +45,6 @@ Server:
  Built:           Mon Aug  5 15:09:42 2019
  OS/Arch:         linux/amd64
  Experimental:    false
-```
-
-docker-composeのインストールとファイル権限変更
-
-[docker compose公式](https://docs.docker.com/compose/install/)
-
-```
-# curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-# chmod +x /usr/local/bin/docker-compose
-```
-
-バージョンの確認
-
-```
-# docker-compose -version
-docker-compose version 1.24.1, build 4667896b
 ```
 
 ## Docker MySQL
@@ -198,9 +182,10 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 # docker start 4fc496c089a1
 ```
 
-削除
+停止し削除(CONTAINER IDではなくNAMESでの指定も可能)
 
 ```
+# docker stop mysqld
 # docker rm mysqld
 ```
 
@@ -213,10 +198,26 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 ## docker-compose
 
+docker-composeのインストールとファイル権限変更
+
+[docker compose公式](https://docs.docker.com/compose/install/)
+
+```
+# curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+# chmod +x /usr/local/bin/docker-compose
+```
+
+バージョンの確認
+
+```
+# docker-compose -version
+docker-compose version 1.24.1, build 4667896b
+```
+
 docker-compose用のディレクトリ作成と遷移
 
 ```
-# cd /Vagrant
+# cd /vagrant 
 # mkdir docker_mysql
 # cd docker_mysql
 ```
@@ -228,13 +229,17 @@ docker-compose.ymlの作成(vi以下の内容をペースト)
 version: '3.3'
 services:
   db:
+    container_name: mysql-db
     build: ./mysql/
     image: mysql:latest
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_ROOT_PASSWORD: mysql
+    expose:
+      - "3306"
     ports:
       - "3307:3306"
+    hostname: mysql-db
 ```
 
 docker MySQL用のディレクトリ作成
