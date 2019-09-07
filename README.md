@@ -17,7 +17,7 @@ VirtualBox、Vagrantがインストールされていること。DockerはVirtua
 
 SSHターミナルが利用できること
 
-**重要 上記環境を整え事前に[Step0](https://github.com/hironomiu/Local-Development-Environment-Hands-On/blob/master/Step1.md)を行うこと**
+**重要 上記環境を整え事前に[Step0](https://github.com/hironomiu/Local-Development-Environment-Hands-On/blob/master/Step0.md)を行うこと**
 
 ## 前提知識
 一般的なLinuxコマンド(ディレクトリ遷移、ファイル移動、ファイル編集)が扱えること。ハンズオン中ファイル編集はvimにて実演するため自身が扱うファイル編集方法に読み替えられること
