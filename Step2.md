@@ -138,7 +138,7 @@ repolist: 30,274
 PHP7、apache(httpd)のインストールを行う
 
 ```
-# yum -y install --enablerepo=remi,remi-php74 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
+# yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
 ```
 
 PHPのバージョンを確認
@@ -402,7 +402,11 @@ mysql> show databases;
 | wordpress          |
 +--------------------+
 5 rows in set (0.04 sec)
+```
 
+DDLの確認
+
+```
 mysql> show create database wordpress;
 +-----------+-------------------------------------------------------------------------------------------------------------------------------------+
 | Database  | Create Database                                                                                                                     |
@@ -416,14 +420,10 @@ mysql> show create database wordpress;
 
 ```
 mysql> create user 'admin'@'localhost'identified by 'qk9Baa29+sL';
-Query OK, 0 rows affected (0.02 sec)
 
-mysql>
 mysql> grant all on *.* to 'admin'@'localhost';
-Query OK, 0 rows affected (0.01 sec)
 
 mysql> alter user 'admin'@'localhost' identified with mysql_native_password by 'qk9Baa29+sL';
-Query OK, 0 rows affected (0.01 sec)
 
 mysql> exit
 ```
