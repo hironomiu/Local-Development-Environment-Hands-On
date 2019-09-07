@@ -37,6 +37,13 @@ centos/7           (virtualbox, 1905.1)
 カレントディレクトリで`Vagrantfile`を以下の内容で編集しましょう
 boxファイル`puppetlabs/centos-7.2-64-nocm`、IPアドレス `192.168.56.50`、VirtualBoxでのマシン名 `1day`、メモリ `768M`で設定
 
+|設定項目|設定値|
+|:-|:-|
+|boxファイル|puppetlabs/centos-7.2-64-nocm|
+|IPアドレス|192.168.56.50|
+|VirtualBoxマシン名|1day|
+|メモリ|768M|
+
 ```
 $ vi Vagrantfile
 
