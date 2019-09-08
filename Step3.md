@@ -229,17 +229,17 @@ docker-compose.ymlの作成(vi以下の内容をペースト)
 version: '3.3'
 services:
   db:
-    container_name: mysql-db
+    build: ./mysql/
     image: mysql:latest
-    build: ./mysql
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: qk9Baa29+sL
     expose:
       - "3306"
     ports:
       - "3307:3306"
-    hostname: mysql-db
 ```
 
 docker MySQL用のディレクトリ作成
@@ -255,7 +255,6 @@ Dockerfileの作成(vi以下をペースト)
 # vi Dockerfile
 FROM mysql:latest
 ADD ./conf.d/my.cnf /etc/mysql/conf.d/my.cnf
-ADD ./initdb.d/init.sql /docker-entrypoint-initdb.d/init.sql
 ```
 
 MySQL設定ファイルmy.cnfの作成(vi以下をペースト)
@@ -267,18 +266,7 @@ MySQL設定ファイルmy.cnfの作成(vi以下をペースト)
 # vi my.cnf
 [mysqld]
 innodb-buffer-pool-size=128M
-```
-
-アプリケーションユーザ作成スクリプトの作成(vi以下をペースト)
-
-```
-# cd ..
-# mkdir initdb.d
-
-# vi init.sql
-create user 'admin'@'%'identified by 'qk9Baa29+sL';
-grant all on *.* to 'admin'@'%';
-alter user 'admin'@'%' identified with mysql_native_password by 'qk9Baa29+sL';
+default-authentication-plugin=mysql_native_password
 ```
 
 docker-composeでbuild
