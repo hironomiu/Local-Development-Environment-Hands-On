@@ -513,9 +513,18 @@ ENV LC_ALL ja_JP.UTF-8
 # docker-compose up -d
 ```
 
-少し時間を置いて
+DBのログイン確認(パスワード：mysql)
+
 ```
-# curl localhost:8000
+# mysql -u root -p -h127.0.0.1
+```
+
+データのリストア(パスワード：mysql)
+
+```
+# cd /vagrant
+# mysql -u root -p -h127.0.0.1 wordpress < export.sql
+Enter password:
 ```
 
 ゲストOSで稼働するWordPressの設定を変更する(MySQLのPORT指定削除)
@@ -526,3 +535,12 @@ ENV LC_ALL ja_JP.UTF-8
 + define( 'DB_HOST', '127.0.0.1' );
 ```
 
+確認
+```
+# curl localhost:8000
+# curl localhost
+```
+
+ブラウザで192.168.56.50、192.168.56.50:8000を開いて確認する
+
+![docker-wordpress-1](./images/step3/docker-wordpress-1.png "docker-wordpress-1")
