@@ -415,4 +415,114 @@ Enter password:
 
 ![error-wordpress-2](./images/step3/error-wordpress-2.png "error-wordpress-2")
 
+## WordPressのDocker化
+PORT8000番にDockerコンテナのWordPressを起動することでWordPress+MySQLをDockerで連携させる
+
+ゲストOSで稼働するMySQLを停止、自動起動抑止
+```
+# systemctl stop mysqld.service
+# systemctl disable mysqld.service
+```
+
+停止と削除
+
+```
+# docker-compose down -v
+```
+
+Dockerイメージの削除`REPOSITORY`がmysqlの`IMAGE ID`を指定
+
+```
+# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+mysql               latest              32ea220bd41c        7 minutes ago       445 MB
+docker.io/mysql     latest              62a9f311b99c        3 weeks ago         445 MB
+
+# docker rmi 32ea220bd41c
+```
+
+docker-compose.ymlの変更(vi以降を全て上書き)
+
+```
+# vi docker-compose.yml
+version: '3.7'
+services:
+  db:
+    build: ./mysql/
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: qk9Baa29+sL
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+  wordpress:
+    build: ./wordpress/
+    image: wordpress:latest
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: qk9Baa29+sL
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      - db
+```
+
+wordpress用のディレクトリ作成と遷移
+
+```
+# mkdir wordpress
+# cd wordpress
+```
+
+Dockerfileの作成(vi以降をペースト)
+
+```
+vi Dockerfile
+FROM wordpress:latest
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update
+RUN apt-get install -y locales
+
+RUN echo "ja_JP.UTF-8 UTF-8" > /etc/locale.gen && \
+    locale-gen ja_JP.UTF-8 && \
+    dpkg-reconfigure locales && \
+    /usr/sbin/update-locale LANG=ja_JP.UTF-8
+
+ENV LC_ALL ja_JP.UTF-8
+```
+
+元のディレクトリへ
+
+```
+# cd ..
+```
+
+`debconf: delaying package configuration, since apt-utils is not installed`は無視して良い
+
+```
+# docker-compose build
+
+# docker-compose up -d
+```
+
+少し時間を置いて
+```
+# curl localhost:8000
+```
+
+ゲストOSで稼働するWordPressの設定を変更する(MySQLのPORT指定削除)
+
+```
+# vi /var/www/html/wordpress/wp-config.php
+- define( 'DB_HOST', '127.0.0.1:3307' );
++ define( 'DB_HOST', '127.0.0.1' );
+```
 
