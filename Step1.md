@@ -328,27 +328,6 @@ $ cat share.txt
 share
 ```
 
-## 仮想環境の再構築、pluginの削除
-
-```
-$ vagrant destroy
-
-$ vagrant plugin list
-$ vagrant plugin uninstall vagrant-vbguest
-
-$ vagrant plugin list
-No plugins installed.
-```
-
-```
-$ vi Vagrantfile
-- config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
-
-$ vagrant up
-$ vagrant ssh
-$ sudo su -
-```
-
 ## ロケールとタイムゾーンの設定
 boxで設定されたLANG en_US.UTF-8、タイムゾーンUTCをja_JP.utf8、JSTに変更する
 
@@ -409,4 +388,44 @@ NTP synchronized: yes
 # yum install -y emacs
 ```
 
+## Tips
+### 仮想環境の再構築、pluginの削除
+
+```
+$ vagrant destroy
+
+$ vagrant plugin list
+$ vagrant plugin uninstall vagrant-vbguest
+
+$ vagrant plugin list
+No plugins installed.
+```
+
+```
+$ vi Vagrantfile
+- config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+
+$ vagrant up
+$ vagrant ssh
+$ sudo su -
+```
+
+### Vagrant基本操作
+
+起動
+```
+$ vagrant up
+```
+
+停止
+```
+$vagrant halt
+```
+
+削除
+```
+$ vagrant destroy
+```
+
 これでStep1は完了です
+
