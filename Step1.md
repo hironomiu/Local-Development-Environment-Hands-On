@@ -326,9 +326,13 @@ end
 ### Vagrant再起動
 vagrantの削除から起動(5分ほど掛かります)
 
+yを選択
 ```
 $ vagrant destroy
+```
 
+起動
+```
 $ vagrant up
 ```
 
@@ -411,26 +415,29 @@ NTP synchronized: yes
 # yum install -y emacs
 ```
 
-## Tips
+## Tips(ハンズオンでは行わない)
 ### 仮想環境の再構築、pluginの削除
+pluginが不要な場合の削除方法
 
+pluginの確認
 ```
-$ vagrant destroy
-
 $ vagrant plugin list
+```
+
+対象のpluginを指定しuninnstall
+```
 $ vagrant plugin uninstall vagrant-vbguest
 
+確認
+```
 $ vagrant plugin list
 No plugins installed.
 ```
 
+Vagrantfileにてpluginの利用記述がある場合は削除
 ```
 $ vi Vagrantfile
 - config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
-
-$ vagrant up
-$ vagrant ssh
-$ sudo su -
 ```
 
 ### Vagrant基本操作
@@ -448,6 +455,11 @@ $vagrant halt
 削除
 ```
 $ vagrant destroy
+```
+
+状態確認
+```
+$ vagrant status
 ```
 
 これでStep1は完了です
