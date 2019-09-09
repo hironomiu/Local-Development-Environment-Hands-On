@@ -522,7 +522,8 @@ SELinuxの設定
 # chcon -R -t httpd_sys_rw_content_t /var/www/html/wordpress
 ```
 
-apache(httpd)の設定変更と再起動
+### apache(httpd)の設定変更と再起動
+apache(httpd)の設定ファイル`httpd.conf`でDocuemtRootとDirectoryの変更を行い再起動
 
 ```
 # vi /etc/httpd/conf/httpd.conf
@@ -538,6 +539,15 @@ apache(httpd)の再起動
 # systemctl restart httpd.service
 ```
 
+確認
+```
+# systemctl status httpd.service
+```
+
+### Question
+DocumentRootについて調べましょう
+
+### WordPressを表示
 **ブラウザで192.168.56.50を表示。Wordpressの設定画面が表示されれば成功**
 
 ![wordpress-1](./images/step2/wordpress-1.png "wordpress-1")
