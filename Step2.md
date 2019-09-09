@@ -144,26 +144,23 @@ PHP7、apache(httpd)のインストールを行う
 # yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
 ```
 
-PHPのバージョンを確認
+PHPのバージョンを確認(PHP 7.XX.XXであること)
 
 ```
 # php -v
 ```
 
-apache(httpd)がインストールされていることを確認
-
-```
-# yum list installed | grep httpd
-```
-
 ### apache起動、自動起動
 apache(httpd)の起動、自動起動の設定を行う
 
+apache(httpd)がインストールされていることを確認
+```
+# yum list installed | grep httpd
+```
 起動
 ```
 # systemctl start httpd.service
 ```
-
 自動起動設定
 ```
 # systemctl enable httpd.service
@@ -219,7 +216,12 @@ httpd   3007 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
 
 ```
 <?php
-echo "hello PHP";
+echo "hello PHP<br>";
+echo date('Y年m月d日 H時i分s秒');
+```
+curlで確認
+```
+# curl localhost
 ```
 
 ### Question
@@ -231,6 +233,23 @@ PHPのBuiltinWebServerの機能を使いPORT 8888番でindex.phpを表示して�
 # cd /var/www/html
 # php -S localhost:8888
 ```
+
+### PHP設定変更
+php.iniのタイムゾーンを変更する
+```
+# vi /etc/php.ini
+- ;date.timezone =
++ date.timezone = "Asia/Tokyo"
+```
+apache(httpd)再起動
+```
+# systemctl restart httpd.service
+```
+確認
+```
+# curl localhost
+```
+
 
 ## MySQL
 MySQLのインストールを行う
