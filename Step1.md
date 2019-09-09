@@ -80,7 +80,6 @@ default                   running (virtualbox)
 
 ## ssh-configの確認
 今回のVagrant環境に接続する際の設定を確認する
-
 ```
 $ vagrant ssh-config
 Host default
@@ -94,6 +93,10 @@ Host default
   IdentitiesOnly yes
   LogLevel FATAL
 ```
+
+### Question
+`vagrant ssh-config`の結果を元に仮想環境へssh接続をしてみましょう
+
 ## VirtualBoxでの確認
 VirtualBoxのGUIコンソールで`1day`と言う仮想サーバが存在し「実行中」となっていることを確認する
 
@@ -122,7 +125,8 @@ vagrant  pts/0        2019-09-07 00:53 (10.0.2.2)
 #
 ```
 
-**whoコマンドについて調べてみましょう**
+### Question
+whoコマンドについて調べてみましょう
 
 ## 設定内容の確認
 NICの確認IPアドレスが`Vagrantfile`で設定したIP`192.168.56.50`が設定されていること。

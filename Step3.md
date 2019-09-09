@@ -458,10 +458,12 @@ services:
     expose:
       - "3306"
     ports:
-      - "3306:3306"
+      - "3307:3306"
   wordpress:
     build: ./wordpress/
     image: wordpress:latest
+    expose:
+      - "80"
     ports:
       - "8000:80"
     restart: always
@@ -516,23 +518,15 @@ ENV LC_ALL ja_JP.UTF-8
 DBのログイン確認(パスワード：mysql)
 
 ```
-# mysql -u root -p -h127.0.0.1
+# mysql -u root -p -h127.0.0.1 --port=3307
 ```
 
 データのリストア(パスワード：mysql)
 
 ```
 # cd /vagrant
-# mysql -u root -p -h127.0.0.1 wordpress < export.sql
+# mysql -u root -p -h127.0.0.1 --port=3307 wordpress < export.sql
 Enter password:
-```
-
-ゲストOSで稼働するWordPressの設定を変更する(MySQLのPORT指定削除)
-
-```
-# vi /var/www/html/wordpress/wp-config.php
-- define( 'DB_HOST', '127.0.0.1:3307' );
-+ define( 'DB_HOST', '127.0.0.1' );
 ```
 
 確認
