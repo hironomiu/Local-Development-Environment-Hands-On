@@ -257,7 +257,7 @@ yumrepoをインストールし`enabled`を確認
 # rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
 ```
 
-確認
+確認(MySQL 8.0 Community Serverがenableであること)
 
 ```
 # yum repolist all | grep mysql
@@ -283,32 +283,42 @@ mysql80-community/x86_64           MySQL 8.0 Community Server    enabled:    129
 mysql80-community-source           MySQL 8.0 Community Server -  disabled
 ```
 
+### インストール
 MySQL8.0をインストール(450M以上あるので注意)
 
 ```
 # yum -y install mysql-community-server
 ```
 
-MySQLの起動、自動起動を設定
+### MySQLの起動、自動起動を設定
 
+起動
 ```
 # systemctl start mysqld.service
+```
+自動起動の設定
+```
 # systemctl enable mysqld.service
 ```
 
 確認(runningであること)
-
 ```
 # systemctl status mysqld.service
 ```
+確認(enableであること)
+```
+# systemctl is-enabled mysqld.service
+```
 
+### PORT確認
 MySQLがPORT3306番をLISTENしているか確認
-
 ```
 # lsof -i:3306
 COMMAND   PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
 mysqld  31699 mysql   30u  IPv6  65873      0t0  TCP *:mysql (LISTEN)
 ```
+
+### rootパスワード
 MySQLのrootパスワードをログから確認`A temporary password is generated for root@localhost:`の右を確認
 
 ```
@@ -316,6 +326,7 @@ MySQLのrootパスワードをログから確認`A temporary password is generat
 # grep password /var/log/mysqld.log
 ```
 
+### 初期設定
 `mysql_secure_installation`を実行
 
 ```
