@@ -10,17 +10,23 @@ MySQLをdockerで利用するため、dockerのインストール、起動を行
 # yum install -y docker
 ```
 
-起動と自動起動の設定
+### 起動と自動起動の設定
 
+起動
 ```
 # systemctl start docker.service
+```
+自動起動の設定
+```
 # systemctl enable docker.service
 ```
-
 確認(runningであること)
-
 ```
-# systemctl status  docker.service
+# systemctl status docker.service
+```
+確認(enabledであること)
+```
+# systemctl is-enabled docker.service
 ```
 
 バージョンの確認
