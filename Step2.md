@@ -604,5 +604,5 @@ DocumentRootについて調べましょう
 
 ![wordpress-9](./images/step2/wordpress-9.png "wordpress-9")
 
-これでStep2は完了です
+これでStep2は完了です。
 
