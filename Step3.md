@@ -232,7 +232,7 @@ docker-compose.ymlの作成(vi以下の内容をペースト)
 
 ```
 # vi docker-compose.yml
-version: '3.3'
+version: '3.7'
 services:
   db:
     build: ./mysql/
