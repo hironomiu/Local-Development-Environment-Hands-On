@@ -427,6 +427,7 @@ $ vagrant plugin list
 対象のpluginを指定しuninnstall
 ```
 $ vagrant plugin uninstall vagrant-vbguest
+```
 
 確認
 ```
