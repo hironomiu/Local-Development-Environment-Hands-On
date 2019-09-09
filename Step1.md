@@ -278,22 +278,31 @@ $ ll
 ファイルが存在しないことを確認
 ```
 
+### vagrant-vbguest
 `vagrant-vbguest`のインストール
 
+確認(`vagrant-vbguest`が存在しないこと)
 ```
 $ vagrant plugin list
 No plugins installed.
+```
 
+インストール
+```
 $ vagrant plugin install vagrant-vbguest
 Installing the 'vagrant-vbguest' plugin. This can take a few minutes...
 Fetching: micromachine-3.0.0.gem (100%)
 Fetching: vagrant-vbguest-0.19.0.gem (100%)
 Installed the plugin 'vagrant-vbguest (0.19.0)'!
+```
 
+確認
+```
 $ vagrant plugin list
 vagrant-vbguest (0.19.0, global)
 ```
 
+### Vagrantfile編集
 Vagrantfileに以下のように`config.vm.synced_folder ".", "/vagrant", type: "virtualbox"`を追記しましょう
 
 ```
@@ -314,6 +323,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+### Vagrant再起動
 vagrantの削除から起動(5分ほど掛かります)
 
 ```
