@@ -463,5 +463,5 @@ $ vagrant destroy
 $ vagrant status
 ```
 
-これでStep1は完了です
+これでStep1は完了です。
 
