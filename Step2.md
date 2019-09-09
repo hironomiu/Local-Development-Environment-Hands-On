@@ -134,6 +134,9 @@ repo id                                         repo name                       
 repolist: 30,274
 ```
 
+### Question
+yum、RPMについて調べてみましょう
+
 ## PHP7、apache(httpd)
 PHP7、apache(httpd)のインストールを行う
 
@@ -155,9 +158,19 @@ apache(httpd)がインストールされていることを確認
 
 apache(httpd)の起動、自動起動の設定を行う
 
+起動
 ```
 # systemctl start httpd.service
+```
+
+自動起動設定
+```
 # systemctl enable httpd.service
+```
+
+確認(enableであること)
+```
+# systemctl is-enabled httpd.service
 ```
 
 確認(runningであること)
@@ -197,6 +210,23 @@ httpd    773 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
 httpd   3007 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
 ```
 
+### Question
+`/var/www/html/`配下に以下のindex.phpを配置しブラウザ、CLI`curl localhost`で確認してみましょう
+
+```
+<?php
+echo "hello PHP";
+```
+
+### Question
+PHPのBuiltinWebServerの機能を使いPORT 8888番でindex.phpを表示してみましょう(CTL + cで停止)
+
+**注 SELinuxが有効なため現時点では別ターミナルから`curl localhost`のみ表示できます**
+
+```
+# php -S localhost:8888
+```
+
 ## MySQL
 MySQLのインストールを行う
 
@@ -210,13 +240,11 @@ mariadb-libs-5.5.60-1.el7_5.x86_64
 ```
 
 存在する場合削除
-
 ```
 # yum -y remove mariadb-libs
 ```
 
 ディレクトリも削除
-
 ```
 # rm -rf /var/lib/mysql/
 ```
