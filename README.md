@@ -1,7 +1,7 @@
 # Local-Development-Environment-Hands-On
 
 ## 概要
-ローカルPCにVirtualBox、Vagrantを用いてLinux開発環境を構築し、その環境にDockerコンテナを立ち上げてVirtualBox、Vagrant,Dockerの基本的な扱い方を学びます。
+ローカルPCにVirtualBox、Vagrantを用いて基本的なLAMP開発環境を構築し、その環境からDockerコンテナを立ち上げてVirtualBox、Vagrant、Dockerの基本的な扱い方を学びます。
 
 [Step1](https://github.com/hironomiu/Local-Development-Environment-Hands-On/blob/master/Step1.md)  
 [Step2](https://github.com/hironomiu/Local-Development-Environment-Hands-On/blob/master/Step2.md)    
@@ -10,7 +10,7 @@
 
 ## 前提環境
 
-VirtualBox、Vagrantがインストールされていること。
+**VirtualBox、Vagrantがインストールされていること**
 
 [VirtualBox公式](https://www.virtualbox.org/)
 
