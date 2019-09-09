@@ -156,6 +156,7 @@ apache(httpd)がインストールされていることを確認
 # yum list installed | grep httpd
 ```
 
+### apache起動、自動起動
 apache(httpd)の起動、自動起動の設定を行う
 
 起動
@@ -167,8 +168,11 @@ apache(httpd)の起動、自動起動の設定を行う
 ```
 # systemctl enable httpd.service
 ```
-
-確認(enableであること)
+確認(runningであること)
+```
+# systemctl status httpd.service
+```
+確認(enabledであること)
 ```
 # systemctl is-enabled httpd.service
 ```
@@ -300,12 +304,11 @@ MySQL8.0をインストール(450M以上あるので注意)
 ```
 # systemctl enable mysqld.service
 ```
-
 確認(runningであること)
 ```
 # systemctl status mysqld.service
 ```
-確認(enableであること)
+確認(enabledであること)
 ```
 # systemctl is-enabled mysqld.service
 ```
@@ -397,6 +400,20 @@ y
 
 ```
 Reload privilege tables now? (Press y|Y for Yes, any other key for No) : 
+```
+
+### 設定変更
+MySQLの設定ファイル`my.cnf`を以下に上書きする
+```
+# vi /etc/my.cnf
+[mysqld]
+innodb-buffer-pool-size=128M
+default-authentication-plugin=mysql_native_password
+```
+
+再起動
+```
+# systemctl restart mysqld.service
 ```
 
 MySQLクライアントからログイン。パスワードは`mysql_secure_installation`で設定したものを入力
