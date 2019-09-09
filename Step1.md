@@ -98,7 +98,9 @@ Host default
 `vagrant ssh-config`の結果を元に仮想環境へssh接続をしてみましょう
 
 ## VirtualBoxでの確認
-VirtualBoxのGUIコンソールで`1day`と言う仮想サーバが存在し「実行中」となっていることを確認する
+VirtualBoxのGUIコンソールで`1day`と言う仮想サーバが存在し「実行中」となっていることを確認
+
+ネットワークに「アダプター１」「アダプター２」が存在することを確認
 
 ![virtualbox-1](./images/step1/virtualbox-1.png "virtualbox-1")
 
@@ -230,10 +232,14 @@ DirectMap2M:      735232 kB
 ```
 
 ## Question
-サーバスペックの視点でCPU数、Disk容量、その他について確認してみましょう
+起動した仮想サーバの確認をしましょう
+
+- CPU数
+- Disk容量
+- その他
 
 ## ssh接続
-`vagrant ssh`をsshコマンドで実行
+`vagrant ssh`、前述のshh以外のsshログイン
 
 ```
 $ ssh -i /vagrant ssh-configで調べた鍵を指定 -o StrictHostKeyChecking=no vagrant@192.168.56.50
@@ -245,6 +251,9 @@ $ exit
 logout
 Connection to 192.168.56.50 closed.
 ```
+
+### Question
+whoの結果が違う理由を考えてみましょう
 
 ## ファイル共有
 デフォルトではHOST-GUEST間でファイルが共有できないため`vagrant-vbguest`の機能を使いHOST-GUEST間のファイル共有を実現しましょう
