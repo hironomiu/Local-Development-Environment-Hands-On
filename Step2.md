@@ -416,6 +416,7 @@ default-authentication-plugin=mysql_native_password
 # systemctl restart mysqld.service
 ```
 
+### ログイン
 MySQLクライアントからログイン。パスワードは`mysql_secure_installation`で設定したものを入力
 
 パスワード：i1db+abd8kD
@@ -438,6 +439,7 @@ mysql> show databases;
 mysql>
 ```
 
+### アプリケーション用DB作成
 DB`wordpress`の作成
 
 ```
@@ -473,10 +475,12 @@ mysql> show create database wordpress;
 1 row in set (0.00 sec)
 ```
 
-アプリケーションユーザの作成
+
+### アプリケーションユーザの作成
+`'admin'@'localhost'`ユーザを作成
 
 ```
-mysql> create user 'admin'@'localhost'identified by 'qk9Baa29+sL';
+mysql> create user 'admin'@'localhost' identified by 'qk9Baa29+sL';
 
 mysql> grant all on *.* to 'admin'@'localhost';
 
