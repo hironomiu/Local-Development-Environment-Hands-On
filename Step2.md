@@ -224,6 +224,7 @@ PHPのBuiltinWebServerの機能を使いPORT 8888番でindex.phpを表示して�
 **注 SELinuxが有効なため現時点では別ターミナルから`curl localhost`のみ表示できます**
 
 ```
+# cd /var/www/html
 # php -S localhost:8888
 ```
 
