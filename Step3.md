@@ -278,7 +278,7 @@ default-authentication-plugin=mysql_native_password
 docker-composeでbuild
 
 ```
-# cd ..
+# cd ../..
 # docker-compose build
 ```
 
@@ -311,7 +311,7 @@ docker MySql コンテナの確認
 コンテナ内でMySQLに接続(パスワード：mysql)
 
 ```
-# mysql -u root -p -h127.0.0.1 --port=3307
+# mysql -u root -p
 Enter password:
 ```
 
@@ -433,6 +433,7 @@ PORT8000番にDockerコンテナのWordPressを起動することでWordPress+My
 停止と削除
 
 ```
+# cd docker_mysql
 # docker-compose down -v
 ```
 
@@ -492,7 +493,7 @@ wordpress用のディレクトリ作成と遷移
 Dockerfileの作成(vi以降をペースト)
 
 ```
-vi Dockerfile
+# vi Dockerfile
 FROM wordpress:latest
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -537,10 +538,15 @@ Enter password:
 
 確認
 ```
-# curl localhost:8000
+# curl -L localhost:8000
 # curl localhost
 ```
 
 ブラウザで192.168.56.50、192.168.56.50:8000を開いて確認する
 
 ![docker-wordpress-1](./images/step3/docker-wordpress-1.png "docker-wordpress-1")
+
+### Quesiton
+ブラウザで192.168.56.50、192.168.56.50:8000を開き、挙動について調べましょう
+
+これでStep3は完了です。
