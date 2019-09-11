@@ -291,6 +291,7 @@ docker imegeの確認
 dockerコンテナの起動
 
 ```
+# docker-compose build
 # docker-compose up -d
 ```
 
