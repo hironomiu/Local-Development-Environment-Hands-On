@@ -425,12 +425,6 @@ Enter password:
 ## WordPressのDocker化
 PORT8000番にDockerコンテナのWordPressを起動することでWordPress+MySQLをDockerで連携させる
 
-ゲストOSで稼働するMySQLを停止、自動起動抑止
-```
-# systemctl stop mysqld.service
-# systemctl disable mysqld.service
-```
-
 停止と削除
 
 ```
