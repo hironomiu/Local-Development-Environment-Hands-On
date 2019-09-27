@@ -323,16 +323,10 @@ end
 ```
 
 ### Vagrant再起動
-vagrantの削除から起動(5分ほど掛かります)
+vagrantへ追記反映
 
-yを選択
 ```
-$ vagrant destroy
-```
-
-起動
-```
-$ vagrant up
+$ vagrant reload
 ```
 
 ファイル共有の確認

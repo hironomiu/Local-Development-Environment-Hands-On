@@ -179,6 +179,8 @@ localhostに対しhttpリクエストを投げWebサーバ(httpd)が動作して
 ```
 # curl localhost
 ```
+### Question
+`curl`コマンドでレスポンスヘッダも表示させましょう
 
 **ブラウザでも同様に192.168.56.50で確認する**
 
