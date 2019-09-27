@@ -174,12 +174,6 @@ apache(httpd)がインストールされていることを確認
 # systemctl is-enabled httpd.service
 ```
 
-確認(runningであること)
-
-```
-# systemctl status httpd.service
-```
-
 localhostに対しhttpリクエストを投げWebサーバ(httpd)が動作していることを確認
 
 ```
