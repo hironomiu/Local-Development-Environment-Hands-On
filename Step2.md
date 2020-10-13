@@ -11,14 +11,18 @@ Step1で構築した環境にapache、php、mysqlをインストールしLAMP環
 
 ```
 # ll /etc/yum.repos.d/
-total 32
--rw-r--r--. 1 root root 1664 Nov 23  2018 CentOS-Base.repo
--rw-r--r--. 1 root root 1309 Nov 23  2018 CentOS-CR.repo
--rw-r--r--. 1 root root  649 Nov 23  2018 CentOS-Debuginfo.repo
--rw-r--r--. 1 root root  314 Nov 23  2018 CentOS-fasttrack.repo
--rw-r--r--. 1 root root  630 Nov 23  2018 CentOS-Media.repo
--rw-r--r--. 1 root root 1331 Nov 23  2018 CentOS-Sources.repo
--rw-r--r--. 1 root root 5701 Nov 23  2018 CentOS-Vault.repo
+total 44
+-rw-r--r--. 1 root root  731 Aug 14  2019 CentOS-AppStream.repo
+-rw-r--r--. 1 root root  712 Aug 14  2019 CentOS-Base.repo
+-rw-r--r--. 1 root root  798 Aug 14  2019 CentOS-centosplus.repo
+-rw-r--r--. 1 root root 1320 Aug 14  2019 CentOS-CR.repo
+-rw-r--r--. 1 root root  668 Aug 14  2019 CentOS-Debuginfo.repo
+-rw-r--r--. 1 root root  756 Aug 14  2019 CentOS-Extras.repo
+-rw-r--r--. 1 root root  338 Aug 14  2019 CentOS-fasttrack.repo
+-rw-r--r--. 1 root root  928 Aug 14  2019 CentOS-Media.repo
+-rw-r--r--. 1 root root  736 Aug 14  2019 CentOS-PowerTools.repo
+-rw-r--r--. 1 root root 1382 Aug 14  2019 CentOS-Sources.repo
+-rw-r--r--. 1 root root   74 Aug 14  2019 CentOS-Vault.repo
 
 # cat /etc/yum.repos.d/CentOS-Base.repo
 
@@ -79,7 +83,7 @@ epelのインストール(注 `yum -y update`は数分ほど掛かる)
 remiのインストール
 
 ```
-# yum -y install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+# yum -y install http://rpms.famillecollet.com/enterprise/remi-release-8.rpm
 # yum -y update
 ```
 
