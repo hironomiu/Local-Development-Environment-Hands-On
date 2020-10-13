@@ -19,17 +19,17 @@ $ ls -la
 ```
 
 ## boxファイルの配布
-インターネットからDLするとそれなりのサイズのため、ネットワーク環境に不安がある場合に限り、事前に渡したUSBの中にある　`centos/7`ディレクトリを指定したディレクトリにコピーしましょう
+インターネットからDLするとそれなりのサイズのため、ネットワーク環境に不安がある場合に限り、事前に渡したUSBの中にある　`centos/8`ディレクトリを指定したディレクトリにコピーしましょう
 
 `~/.vagrant.d/boxes` ボックスファイルが格納されるディレクトリ    
-`vagrant box list` ローカルで利用可能なボックスのリスト表示。今回`centos/7           (virtualbox, 1905.1)`が初回に表示されないこと    
+`vagrant box list` ローカルで利用可能なボックスのリスト表示。今回`centos/8           (virtualbox, 1905.1)`が初回に表示されないこと    
 
 ```
 $ vagrant box list
 
-$ cp -R /Volumes/NO\ NAME/centos-VAGRANTSLASH-7 ~/.vagrant.d/boxes/.
+$ cp -R /Volumes/NO\ NAME/centos-VAGRANTSLASH-8 ~/.vagrant.d/boxes/.
 $ vagrant box list
-centos/7           (virtualbox, 1905.1)
+centos/8           (virtualbox, 1905.1)
 ```
 
 ## Vagrantfile編集
@@ -37,7 +37,7 @@ centos/7           (virtualbox, 1905.1)
 
 |設定項目|設定値|
 |:-|:-|
-|boxファイル|puppetlabs/centos-7.2-64-nocm|
+|boxファイル|centos/8|
 |IPアドレス|192.168.56.50|
 |VirtualBoxマシン名|1day|
 |メモリ|768M|
@@ -50,7 +50,7 @@ $ vi Vagrantfile
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "centos/7"
+  config.vm.box = "centos/8"
   config.vm.hostname = "1day.local"
   config.vm.network :private_network, ip: "192.168.56.50"
   config.vm.provider :virtualbox do |vb|
@@ -311,7 +311,7 @@ $ cat Vagrantfile
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "centos/7"
+  config.vm.box = "centos/8"
   config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
   config.vm.hostname = "1day.local"
   config.vm.network :private_network, ip: "192.168.56.50"

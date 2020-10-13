@@ -16,7 +16,7 @@ Vagrantfileを以下に書き換える
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "centos/7"
+  config.vm.box = "centos/8"
   config.vm.hostname = "test.local"
   config.vm.network :private_network, ip: "192.168.56.60"
   config.vm.provider :virtualbox do |vb|
@@ -33,7 +33,7 @@ $ cat Vagrantfile
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "centos/7"
+  config.vm.box = "centos/8"
   config.vm.hostname = "test.local"
   config.vm.network :private_network, ip: "192.168.56.60"
   config.vm.provider :virtualbox do |vb|
