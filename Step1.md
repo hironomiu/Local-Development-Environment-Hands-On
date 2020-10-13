@@ -277,6 +277,14 @@ $ ll
 ファイルが存在しないことを確認
 ```
 
+### kernel-develのインストール 
+```
+$ vagrant ssh
+# sudo su -
+# yum groupinstall -y "Development Tools"
+# yum install -y https://people.centos.org/arrfab/shim/results.c8/kernel/20190604090648/4.18.0-80.el8.x86_64/kernel-devel-4.18.0-80.el8.x86_64.rpm
+```
+
 ### vagrant-vbguest
 `vagrant-vbguest`のインストール
 
