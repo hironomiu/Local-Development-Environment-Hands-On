@@ -91,67 +91,68 @@ remiのインストール
 
 ```
 # ll /etc/yum.repos.d/
-total 96
--rw-r--r--. 1 root root 1664 Nov 23  2018 CentOS-Base.repo
--rw-r--r--. 1 root root 1309 Nov 23  2018 CentOS-CR.repo
--rw-r--r--. 1 root root  649 Nov 23  2018 CentOS-Debuginfo.repo
--rw-r--r--. 1 root root  314 Nov 23  2018 CentOS-fasttrack.repo
--rw-r--r--. 1 root root  630 Nov 23  2018 CentOS-Media.repo
--rw-r--r--. 1 root root 1331 Nov 23  2018 CentOS-Sources.repo
--rw-r--r--. 1 root root 5701 Nov 23  2018 CentOS-Vault.repo
--rw-r--r--. 1 root root  951 Oct  2  2017 epel.repo
--rw-r--r--. 1 root root 1050 Oct  2  2017 epel-testing.repo
--rw-r--r--. 1 root root  446 Mar  8 07:34 remi-glpi91.repo
--rw-r--r--. 1 root root  446 Mar  8 07:34 remi-glpi92.repo
--rw-r--r--. 1 root root  446 Mar  8 07:34 remi-glpi93.repo
--rw-r--r--. 1 root root  446 Mar  8 07:34 remi-glpi94.repo
--rw-r--r--. 1 root root  855 Mar  8 07:34 remi-modular.repo
--rw-r--r--. 1 root root  456 Mar  8 07:34 remi-php54.repo
--rw-r--r--. 1 root root 1314 Mar  8 07:34 remi-php70.repo
--rw-r--r--. 1 root root 1314 Mar  8 07:34 remi-php71.repo
--rw-r--r--. 1 root root 1314 Mar  8 07:34 remi-php72.repo
--rw-r--r--. 1 root root 1314 Mar  8 07:34 remi-php73.repo
--rw-r--r--. 1 root root 2605 Mar  8 07:34 remi.repo
--rw-r--r--. 1 root root  750 Mar  8 07:34 remi-safe.repo
+total 84
+-rw-r--r--. 1 root root  731 Sep 16 05:10 CentOS-AppStream.repo
+-rw-r--r--. 1 root root  712 Sep 16 05:10 CentOS-Base.repo
+-rw-r--r--. 1 root root  798 Sep 16 05:10 CentOS-centosplus.repo
+-rw-r--r--. 1 root root 1043 Sep 16 05:10 CentOS-CR.repo
+-rw-r--r--. 1 root root  668 Sep 16 05:10 CentOS-Debuginfo.repo
+-rw-r--r--. 1 root root  743 Sep 16 05:10 CentOS-Devel.repo
+-rw-r--r--. 1 root root  756 Sep 16 05:10 CentOS-Extras.repo
+-rw-r--r--. 1 root root  338 Sep 16 05:10 CentOS-fasttrack.repo
+-rw-r--r--. 1 root root  738 Sep 16 05:10 CentOS-HA.repo
+-rw-r--r--. 1 root root  928 Sep 16 05:10 CentOS-Media.repo
+-rw-r--r--. 1 root root  736 Sep 16 05:10 CentOS-PowerTools.repo
+-rw-r--r--. 1 root root 1382 Sep 16 05:10 CentOS-Sources.repo
+-rw-r--r--. 1 root root   74 Sep 16 05:10 CentOS-Vault.repo
+-rw-r--r--. 1 root root 1167 Dec 19  2019 epel-modular.repo
+-rw-r--r--. 1 root root 1249 Dec 19  2019 epel-playground.repo
+-rw-r--r--. 1 root root 1104 Dec 19  2019 epel.repo
+-rw-r--r--. 1 root root 1266 Dec 19  2019 epel-testing-modular.repo
+-rw-r--r--. 1 root root 1203 Dec 19  2019 epel-testing.repo
+-rw-r--r--. 1 root root  903 Feb 27  2020 remi-modular.repo
+-rw-r--r--. 1 root root 1384 Feb 27  2020 remi.repo
+-rw-r--r--. 1 root root  778 Feb 27  2020 remi-safe.repo
 ```
 
-yumコマンドでも確認
+dnfコマンドでも確認
 
 ```
-# yum repolist
-Loaded plugins: fastestmirror
-Loading mirror speeds from cached hostfile
- * base: ftp.yz.yamagata-u.ac.jp
- * epel: ftp.yz.yamagata-u.ac.jp
- * extras: ftp.yz.yamagata-u.ac.jp
- * remi-safe: mirror.innosol.asia
- * updates: ftp.yz.yamagata-u.ac.jp
-repo id                                         repo name                                                                status
-!base/7/x86_64                                  CentOS-7 - Base                                                          10,019
-!epel/x86_64                                    Extra Packages for Enterprise Linux 7 - x86_64                           13,378
-!extras/7/x86_64                                CentOS-7 - Extras                                                           435
-!mysql-connectors-community/x86_64              MySQL Connectors Community                                                  118
-!mysql-tools-community/x86_64                   MySQL Tools Community                                                        95
-!mysql80-community/x86_64                       MySQL 8.0 Community Server                                                  129
-!remi-safe                                      Safe Remi's RPM repository for Enterprise Linux 7 - x86_64                3,600
-!updates/7/x86_64                               CentOS-7 - Updates                                                        2,500
-repolist: 30,274
+# dnf repolist
+repo id                              repo name
+AppStream                            CentOS-8 - AppStream
+BaseOS                               CentOS-8 - Base
+epel                                 Extra Packages for Enterprise Linux 8 - x86_64
+epel-modular                         Extra Packages for Enterprise Linux Modular 8 - x86_64
+extras                               CentOS-8 - Extras
+remi-modular                         Remi's Modular repository for Enterprise Linux 8 - x86_64
+remi-safe                            Safe Remi's RPM repository for Enterprise Linux 8 - x86_64
 ```
 
 ### Question
-yum、RPMについて調べてみましょう
+dnf、yum、RPMについて調べてみましょう
 
 ## PHP7、apache(httpd)
 PHP7、apache(httpd)のインストールを行う
 
 ```
-# yum -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
+# dnf -y module disable php
+# dnf module install -y php:remi-7.3
+dnf
+# dnf -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
 ```
 
 PHPのバージョンを確認(PHP 7.XX.XXであること)
 
 ```
 # php -v
+PHP 7.3.23 (cli) (built: Sep 29 2020 08:33:03) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.3.23, Copyright (c) 1998-2018 Zend Technologies
+```
+### apacheのインストール
+```
+# dnf install -y httpd
 ```
 
 ### apache起動、自動起動
@@ -159,7 +160,11 @@ apache(httpd)の起動、自動起動の設定を行う
 
 apache(httpd)がインストールされていることを確認
 ```
-# yum list installed | grep httpd
+# dnf list installed | grep httpd
+centos-logos-httpd.noarch                   80.5-2.el8                                 @BaseOS
+httpd.x86_64                                2.4.37-21.module_el8.2.0+494+1df74eae      @AppStream
+httpd-filesystem.noarch                     2.4.37-21.module_el8.2.0+494+1df74eae      @AppStream
+httpd-tools.x86_64                          2.4.37-21.module_el8.2.0+494+1df74eae      @AppStream
 ```
 起動
 ```
@@ -194,7 +199,7 @@ localhostに対しhttpリクエストを投げWebサーバ(httpd)が動作して
 apache(httpd)がPORT80番をLISTENしているか確認するため`lsof`をインストール
 
 ```
-# yum -y install lsof
+# dnf -y install lsof
 ```
 
 確認
@@ -211,6 +216,15 @@ httpd    773 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
 httpd   3007 apache    4u  IPv6  16183      0t0  TCP *:http (LISTEN)
 ```
 
+### viの設定
+`~/.virc`に追記する
+```
+# vi ~/.virc
+# cat ~/.virc
+set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileformats=unix,dos,mac
+```
 ### Question
 `/var/www/html/`配下に以下のindex.phpを配置しブラウザ、CLI`curl localhost`で確認してみましょう
 
@@ -241,8 +255,9 @@ php.iniのタイムゾーンを変更する
 - ;date.timezone =
 + date.timezone = "Asia/Tokyo"
 ```
-apache(httpd)再起動
+apache(httpd),php-fpm再起動
 ```
+# systemctl restart php-fpm
 # systemctl restart httpd.service
 ```
 確認
@@ -274,43 +289,28 @@ mariadb-libs-5.5.60-1.el7_5.x86_64
 ```
 
 ### MySQL yumrepo
-yumrepoをインストールし`enabled`を確認
+
+### repoのインストール
+MySQL8.0をインストール
 
 ```
-# rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+# dnf -y localinstall https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm
 ```
 
-確認(MySQL 8.0 Community Serverがenableであること)
-
+### 確認とrepoの設定
 ```
-# yum repolist all | grep mysql
-mysql-cluster-7.5-community/x86_64 MySQL Cluster 7.5 Community   disabled
-mysql-cluster-7.5-community-source MySQL Cluster 7.5 Community - disabled
-mysql-cluster-7.6-community/x86_64 MySQL Cluster 7.6 Community   disabled
-mysql-cluster-7.6-community-source MySQL Cluster 7.6 Community - disabled
-mysql-cluster-8.0-community/x86_64 MySQL Cluster 8.0 Community   disabled
-mysql-cluster-8.0-community-source MySQL Cluster 8.0 Community - disabled
-mysql-connectors-community/x86_64  MySQL Connectors Community    enabled:    118
-mysql-connectors-community-source  MySQL Connectors Community -  disabled
-mysql-tools-community/x86_64       MySQL Tools Community         enabled:     95
-mysql-tools-community-source       MySQL Tools Community - Sourc disabled
-mysql-tools-preview/x86_64         MySQL Tools Preview           disabled
-mysql-tools-preview-source         MySQL Tools Preview - Source  disabled
-mysql55-community/x86_64           MySQL 5.5 Community Server    disabled
-mysql55-community-source           MySQL 5.5 Community Server -  disabled
-mysql56-community/x86_64           MySQL 5.6 Community Server    disabled
-mysql56-community-source           MySQL 5.6 Community Server -  disabled
-mysql57-community/x86_64           MySQL 5.7 Community Server    disabled
-mysql57-community-source           MySQL 5.7 Community Server -  disabled
-mysql80-community/x86_64           MySQL 8.0 Community Server    enabled:    129
-mysql80-community-source           MySQL 8.0 Community Server -  disabled
+# ll /etc/yum.repos.d
+# dnf repolist enabled | grep "mysql.*-community.*"
+```
+
+### モジュールの抑止
+```
+# dnf -y  module disable mysql
 ```
 
 ### インストール
-MySQL8.0をインストール(450M以上あるので注意)
-
 ```
-# yum -y install mysql-community-server
+# dnf -y install mysql-community-server
 ```
 
 ### MySQLの起動、自動起動を設定
@@ -462,7 +462,7 @@ mysql>
 DB`wordpress`の作成
 
 ```
-mysql> create database wordpress;
+mysql> create database wordpress charset = utf8mb4;
 Query OK, 1 row affected (0.07 sec)
 ```
 
@@ -513,7 +513,7 @@ mysql> exit
 `wget`コマンドのインストール
 
 ```
-# yum -y install wget
+# dnf -y install wget
 ```
 
 今回アプリケーションをデプロイするディレクトリへ遷移
@@ -552,6 +552,11 @@ apache(httpd)の設定ファイル`httpd.conf`でDocuemtRootとDirectoryの変�
 +<Directory "/var/www/html/wordpress">
 ```
 
+php-mysqlのインストール
+```
+# dnf -y install php-mysql
+```
+
 apache(httpd)の再起動
 
 ```
@@ -563,7 +568,7 @@ apache(httpd)の再起動
 # systemctl status httpd.service
 ```
 
-### Question
+### Qumestion
 DocumentRootについて調べましょう
 
 ### WordPressを表示

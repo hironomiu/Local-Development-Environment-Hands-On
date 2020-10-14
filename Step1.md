@@ -359,6 +359,16 @@ share
 ## ロケールとタイムゾーンの設定
 boxで設定されたLANG en_US.UTF-8、タイムゾーンUTCをja_JP.utf8、JSTに変更する
 
+localeの確認
+```
+# localectl list-locales
+```
+
+langpack-jaのインストール
+```
+# dnf install glibc-langpack-ja.x86_64
+```
+
 ロケールの指定
 
 ```
