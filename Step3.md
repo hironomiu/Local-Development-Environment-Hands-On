@@ -4,10 +4,14 @@ Step2で構築したLAMP環境のMySQLをDockerコンテナに置き換えます
 ## Docker
 MySQLをdockerで利用するため、dockerのインストール、起動を行いましょう
 
-インストール
-
+リポジトリの追加
 ```
-# yum install -y docker
+# dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+```
+
+インストール
+```
+# dnf -y install docker-ce docker-ce-cli containerd.io
 ```
 
 ### 起動と自動起動の設定
@@ -33,24 +37,33 @@ MySQLをdockerで利用するため、dockerのインストール、起動を行
 
 ```
 # docker version
-Client:
- Version:         1.13.1
- API version:     1.26
- Package version: docker-1.13.1-102.git7f2769b.el7.centos.x86_64
- Go version:      go1.10.3
- Git commit:      7f2769b/1.13.1
- Built:           Mon Aug  5 15:09:42 2019
- OS/Arch:         linux/amd64
+Client: Docker Engine - Community
+ Version:           19.03.13
+ API version:       1.40
+ Go version:        go1.13.15
+ Git commit:        4484c46d9d
+ Built:             Wed Sep 16 17:02:36 2020
+ OS/Arch:           linux/amd64
+ Experimental:      false
 
-Server:
- Version:         1.13.1
- API version:     1.26 (minimum version 1.12)
- Package version: docker-1.13.1-102.git7f2769b.el7.centos.x86_64
- Go version:      go1.10.3
- Git commit:      7f2769b/1.13.1
- Built:           Mon Aug  5 15:09:42 2019
- OS/Arch:         linux/amd64
- Experimental:    false
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.13
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.13.15
+  Git commit:       4484c46d9d
+  Built:            Wed Sep 16 17:01:11 2020
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.3.7
+  GitCommit:        8fba4e9a7d01810a393d5d25a3621dc101981175
+ runc:
+  Version:          1.0.0-rc10
+  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
 ```
 
 ## Docker MySQL
@@ -178,7 +191,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 4fc496c089a1        mysql               "docker-entrypoint..."   About an hour ago   Up About an hour    33060/tcp, 0.0.0.0:3307->3306/tcp   mysqld
 ```
 
-停止
+停止(stop以降は実際のCONTAINER IDを指定)
 ```
 # docker stop 4fc496c089a1
 ```
@@ -209,7 +222,7 @@ docker-composeのインストールとファイル権限変更
 [docker compose公式](https://docs.docker.com/compose/install/)
 
 ```
-# curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+# curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 # chmod +x /usr/local/bin/docker-compose
 ```
 
@@ -217,7 +230,7 @@ docker-composeのインストールとファイル権限変更
 
 ```
 # docker-compose -version
-docker-compose version 1.24.1, build 4667896b
+docker-compose version 1.27.4, build 40524192
 ```
 
 docker-compose用のディレクトリ作成と遷移
