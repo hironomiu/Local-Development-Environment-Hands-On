@@ -1,6 +1,12 @@
 # Step0
 事前確認。このStepでは以降のStepを行うための準備と確認を行います。
 
+## VirtualBox、Vagrantを以下の公式サイトからインストールしましょう
+
+[VirtualBox公式](https://www.virtualbox.org/)
+
+[Vagrant公式](https://www.vagrantup.com/)
+
 ## 事前確認
 任意のディレクトリで以下のコマンどを実行しエラーとならず`Vagrantfile`が作成されていること
 
