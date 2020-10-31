@@ -420,12 +420,12 @@ NTP synchronized: yes
 
 - vim
 ```
-# yum install -y vim
+# dnf install -y vim
 ```
 
 - emacs
 ```
-# yum install -y emacs
+# dnf install -y emacs
 ```
 
 ## Tips(ハンズオンでは行わない)
