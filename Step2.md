@@ -75,16 +75,16 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 epelのインストール(注 `yum -y update`は数分ほど掛かる)
 
 ```
-# yum -y install epel-release
-# yum -y update
+# dnf -y install epel-release
+# dnf -y update
 ```
 
 ### remi
 remiのインストール
 
 ```
-# yum -y install http://rpms.famillecollet.com/enterprise/remi-release-8.rpm
-# yum -y update
+# dnf -y install http://rpms.famillecollet.com/enterprise/remi-release-8.rpm
+# dnf -y update
 ```
 
 **`/etc/yum.repos.d/`ディレクトリと内容について簡単に確認**
