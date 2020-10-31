@@ -361,6 +361,8 @@ boxで設定されたLANG en_US.UTF-8、タイムゾーンUTCをja_JP.utf8、JST
 
 localeの確認
 ```
+$ vagrant ssh
+$ sudo su -
 # localectl list-locales
 ```
 
