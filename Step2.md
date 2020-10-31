@@ -139,7 +139,7 @@ PHP7、apache(httpd)のインストールを行う
 # dnf -y module disable php
 # dnf module install -y php:remi-7.3
 dnf
-# dnf -y install --enablerepo=remi,remi-php73 php php-devel php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
+# dnf -y  install php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
 ```
 
 PHPのバージョンを確認(PHP 7.XX.XXであること)
@@ -181,6 +181,10 @@ httpd-tools.x86_64                          2.4.37-21.module_el8.2.0+494+1df74ea
 確認(enabledであること)
 ```
 # systemctl is-enabled httpd.service
+```
+php-fpmの確認
+```
+# systemctl status php-fpm
 ```
 
 localhostに対しhttpリクエストを投げWebサーバ(httpd)が動作していることを確認
