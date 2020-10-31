@@ -556,4 +556,53 @@ Enter password:
 ### Quesiton
 ブラウザで192.168.56.50、192.168.56.50:8000を開き、挙動について調べましょう
 
+## 正規のportで動かす
+SELinuxの設定
+```
+# setsebool -P container_connect_any 1
+```
+
+停止と削除
+
+```
+# cd /vagrant/docker_mysql
+# docker-compose down -v
+```
+
+Dockerイメージの削除。mysql、wordpressの`IMAGE ID`を全て指定
+
+```
+# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+wordpress           latest              5e943a6f5d83        13 minutes ago      585MB
+mysql               latest              10dccfee5786        15 minutes ago      545MB
+wordpress           <none>              cac87f4b1402        28 hours ago        546MB
+mysql               <none>              db2b37ec6181        8 days ago          545MB
+
+# docker rmi 32ea220bd41c
+```
+
+docker-compose.ymlを8000:80から80:80に修正
+```
+ports:
+      - "80:80"
+```
+
+```
+# cd /vagrant/docker_mysql
+# docker-compose build
+
+# docker-compose up -d
+```
+
+DBのログイン確認(パスワード：mysql)
+
+```
+# mysql -u root -p -h127.0.0.1 --port=3307
+```
+
+データのリストアは行わない(8000番で動作するよう設定されているため)
+
+ブラウザで192.168.56.50を確認
+
 これでStep3は完了です。
