@@ -368,7 +368,7 @@ $ sudo su -
 
 langpack-jaのインストール
 ```
-# dnf install glibc-langpack-ja.x86_64
+# dnf install -y glibc-langpack-ja.x86_64
 ```
 
 ロケールの指定
