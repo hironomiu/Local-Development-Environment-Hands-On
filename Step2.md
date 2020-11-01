@@ -574,11 +574,6 @@ apache(httpd)の設定ファイル`httpd.conf`でDocuemtRootとDirectoryの変�
 +<Directory "/var/www/html/wordpress">
 ```
 
-php-mysqlのインストール
-```
-# dnf -y install php-mysql
-```
-
 apache(httpd)の再起動
 
 ```
