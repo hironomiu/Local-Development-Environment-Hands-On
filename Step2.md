@@ -138,7 +138,6 @@ PHP7、apache(httpd)のインストールを行う
 ```
 # dnf -y module disable php
 # dnf module install -y php:remi-7.3
-dnf
 # dnf -y  install php-mbstring php-pdo php-gd php-xml php-mcrypt php-mysql
 ```
 
