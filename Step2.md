@@ -229,6 +229,10 @@ set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 set fileformats=unix,dos,mac
 ```
 ### Question
+```
+# cd /var/www/html/
+```
+
 `/var/www/html/`配下に以下のindex.phpを配置しブラウザ、CLI`curl localhost`で確認してみましょう
 
 ```
