@@ -562,6 +562,12 @@ SELinuxの設定
 # setsebool -P container_connect_any 1
 ```
 
+httpdの停止
+```
+# systemctl stop httpd.service
+# systemctl disable httpd.service
+```
+
 停止と削除
 
 ```
